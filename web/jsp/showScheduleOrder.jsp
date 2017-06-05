@@ -89,7 +89,6 @@
                                 <th>Loại xe</th>
                                 <th>Biển số</th>
                                 <th>Số chỗ ngồi</th>
-                                <th>Số chỗ còn</th>
                                 <th>Giá vé</th>
                                 <th></th>
                             </tr>
@@ -102,7 +101,6 @@
                                     <td>${car.carType}</td>
                                     <td>${car.numberCar}</td>
                                     <td>${car.numberOfseat}</td>
-                                    <td>${car.numaVailable}</td>
                                     <td>${car.priceTicket}</td>
                                     <td><a href="<c:url value="/schedule/orderTicketDetail.htm?scheduleId=${car.schedule.scheduleId}&carId=${car.carId}"/>"><button class="btn btn-warning pull-right">Đặt Vé</button></a></td>
                                 </tr>

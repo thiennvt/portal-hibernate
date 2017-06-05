@@ -136,12 +136,11 @@
                                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                     <div class="form-group">
                                         <label for="">Ngày Đi</label>
-                                        <s:input path="" type="date" class="form-control" id="" placeholder="" required="required"/>
+                                        <s:input path="dateStart" type="date" class="form-control" id="" placeholder="" required="required"/>
                                     </div>
                                 </div>
                                 <button class="btn btn-primary text-center " style="margin-top: 25px">Tìm xe</button>
                             </div>
-
                         </s:form>
                     </div>
                 </div>

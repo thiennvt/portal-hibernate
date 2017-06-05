@@ -186,10 +186,12 @@ public class ScheduleController {
     public ModelAndView handleSearchScheduleClient(@ModelAttribute("schedule") Schedule sche, HttpSession session) {
         try {
             ModelAndView model = new ModelAndView("/showScheduleOrder");
+//            ArrayList<Car> listCar = scheMdel.getAllCarBySchedule(sche);
             ArrayList<Car> listCar = scheMdel.getAllCarBySchedule(sche);
             model.addObject("listCar", listCar);
             session.setAttribute("diemdau", sche.getPlaceStart().toUpperCase());
             session.setAttribute("diemcuoi", sche.getPlaceCome().toUpperCase());
+            session.setAttribute("dateStart", sche.getDateStart());
             return model;
         } catch (Exception e) {
             e.printStackTrace();
@@ -209,6 +211,7 @@ public class ScheduleController {
             model.addObject("schedule", sche);
             session.setAttribute("diemdau", schedule.getPlaceStart().toUpperCase());
             session.setAttribute("diemcuoi", schedule.getPlaceCome().toUpperCase());
+            
             ArrayList<Car> listCar = scheMdel.getAllCarByScheduleId(sche);
             model.addObject("listCar", listCar);
             return model;
@@ -236,7 +239,6 @@ public class ScheduleController {
             mm.put("carNumber", car.getNumberCar());
             mm.put("price", car.getPriceTicket());
             mm.put("numaberSeat", car.getNumberOfseat());
-            mm.put("numaVailable", car.getNumaVailable());
 
             Ticket ticket = new Ticket();
             model.getModelMap().put("ticket", ticket);

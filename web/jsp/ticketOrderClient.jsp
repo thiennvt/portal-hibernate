@@ -109,9 +109,9 @@
                                     <s:option value="${price}" class="form-control text-center"/>
                                 </s:select>
                                 <label for="">Số chỗ ngồi</label>
-                                <input value="${numaberSeat}" type="text" class="form-control" id="">                          
+                                <input value="${numaberSeat}" type="text" class="form-control" id="" readonly="true">                          
                                 <label for="">Số chỗ còn</label>
-                                <input value="${numaVailable}" type="text" class="form-control" id="">
+                                <input value="${numaVailable}" type="text" class="form-control" id="" readonly="true">
                                 <hr>
                                 <p class="text-center" style="font-size: 25px;color: blue;font-weight: bold">
                                     <label for=""  center;">Thông tin liên hệ</label>

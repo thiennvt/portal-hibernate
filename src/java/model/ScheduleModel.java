@@ -5,9 +5,7 @@
  */
 package model;
 
-import entity.Car;
-import entity.Company;
-import entity.Schedule;
+import entity.*;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -255,7 +253,6 @@ public class ScheduleModel extends BaseModel<Schedule> {
                         listCar.add(listItems.get(j));
                     }
                 }
-                
             }
             return listCar;
         } catch (Exception e) {
@@ -271,13 +268,13 @@ public class ScheduleModel extends BaseModel<Schedule> {
     public ArrayList<Car> getAllCarByScheduleId(Schedule sche) {
         ArrayList<Car> listCar = new ArrayList<>();
         Schedule schedule = getObject(sche.getScheduleId());
-        try{
-                int scheduleId = schedule.getScheduleId();
-                session = sf.openSession();
-                String hql = "from Car c where c.flag = 1 and c.schedule = " + scheduleId + "";
-                tran = session.beginTransaction();
-                listCar = (ArrayList<Car>) session.createQuery(hql).list();
-                tran.commit();
+        try {
+            int scheduleId = schedule.getScheduleId();
+            session = sf.openSession();
+            String hql = "from Car c where c.flag = 1 and c.schedule = " + scheduleId + "";
+            tran = session.beginTransaction();
+            listCar = (ArrayList<Car>) session.createQuery(hql).list();
+            tran.commit();
             return listCar;
         } catch (Exception e) {
             tran.rollback();
@@ -285,26 +282,58 @@ public class ScheduleModel extends BaseModel<Schedule> {
         } finally {
             session.close();
         }
+
         return null;
     }
+
+    //lấy danh sách xe với số ghế trống và ngày đi trong bảng ngày đi
+    public ArrayList<NgayDi> getAllNgayDi(Schedule schedule) {
+        ArrayList<Car> listCarId = getAllCarBySchedule(schedule);
+        ArrayList<NgayDi> listNgaydi = new ArrayList<>();
+        String ngaydi = schedule.getDateStart();
+        try {
+            for (int i = 0; i < listCarId.size(); i++) {
+                int carId = listCarId.get(i).getCarId();
+                session = sf.openSession();
+                String hql = "from NgayDi n where n.car = ? and n.ngayDi = '" + ngaydi + "'";
+                tran = session.beginTransaction();
+                NgayDi items = (NgayDi) session.createQuery(hql).setInteger(0, carId).uniqueResult();
+                tran.commit();
+                if (items != null) {
+                    listNgaydi.add(items);
+                }
+            }
+            return listNgaydi;
+        } catch (Exception e) {
+            tran.rollback();
+            e.printStackTrace();
+
+        } finally {
+            session.close();
+        }
+
+        return null;
+    }
+
     public static void main(String[] args) {
         ScheduleModel model = new ScheduleModel();
-        Schedule sche = new Schedule(1, "ha noi - hai phong", " 150km", "01/01/2017", "hai phong", "ha noi", " dang hoat dong", " dang hoat dong", "01/01/2017", " ", true);
-        ArrayList<Car> list = model.getAllCarByScheduleId(sche);
-//        ArrayList<Schedule> list = model.searchSchedule(sche);
-        for (Car s : list) {
+        Schedule sche = new Schedule(1, "Hải Phòng - Thanh Hóa", " 150km", "01/06/2017", "Yên Bái", "Hải phòng", " dang hoat dong", " dang hoat dong", "01/01/2017", " ", true);
+//        ArrayList<Car> list = model.getAllCarByScheduleId(sche);
+//        ArrayList<Car> list = model.getAllCarByScheduleId(sche);
+        ArrayList<NgayDi> list = model.getAllNgayDi(sche);
+        for (NgayDi s : list) {
             System.out.println(s);
         }
-//        Schedule s = model.getObject(1);
-//        System.out.println(s);
-        //Schedule s = new Schedule(1, " phu tho - ha noi", "250", "cam khe", "10h", "my dinh", "12h30", "lich trinh moi", "dang hoat dong", "  ", "  ", true);
-        //boolean check = model.UpdateObject(s); 
-        //if (check) {
-        //  System.out.println("thanh cong");
-        //} else {
-        //   System.out.println("that bai");
-        //}
 
     }
+//        Schedule s = model.getObject(1);
+//        System.out.println(s);
+    //Schedule s = new Schedule(1, " phu tho - ha noi", "250", "cam khe", "10h", "my dinh", "12h30", "lich trinh moi", "dang hoat dong", "  ", "  ", true);
+    //boolean check = model.UpdateObject(s); 
+    //if (check) {
+    //  System.out.println("thanh cong");
+    //} else {
+    //   System.out.println("that bai");
+    //}
 
 }

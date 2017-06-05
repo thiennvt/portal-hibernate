@@ -87,7 +87,6 @@ public class CarModel extends BaseModel<Car> {
             c.setDateCreateLast(" ");
             c.setFlag(true);
             c.setNote(instence.getNote());
-            c.setNumaVailable(instence.getNumaVailable());
             c.setNumberCar(instence.getNumberCar());
             c.setNumberOfseat(instence.getNumberOfseat());
             c.setPriceTicket(instence.getPriceTicket());
@@ -159,7 +158,7 @@ public class CarModel extends BaseModel<Car> {
                     + "where c.carId = :id";
             tran = session.beginTransaction();
             Query query = session.createQuery(hql);
-            int numaVailable = Integer.parseInt(instence.getNumaVailable()) - Integer.parseInt(quanticket);
+            int numaVailable = Integer.parseInt(quanticket);
             query.setParameter("numaVailable", String.valueOf(numaVailable));
             query.setParameter("id", instence.getCarId());
             int rowCount = query.executeUpdate();
@@ -183,7 +182,7 @@ public class CarModel extends BaseModel<Car> {
                     + "where c.carId = :id";
             tran = session.beginTransaction();
             Query query = session.createQuery(hql);
-            int numaVailable = Integer.parseInt(instence.getNumaVailable()) + Integer.parseInt(quanticket);
+            int numaVailable =  Integer.parseInt(quanticket);
             query.setParameter("numaVailable", String.valueOf(numaVailable));
             query.setParameter("id", instence.getCarId());
             int rowCount = query.executeUpdate();
@@ -309,11 +308,11 @@ public class CarModel extends BaseModel<Car> {
         Schedule s = new Schedule(1);
         Company com = new Company(2);
 
-        Car c = new Car(5, "giường nằm", "19L-1234", "vàng", "30", "30", "toyota", "5h", "8h", "150", "xe êm", "đang áp dụng", " ", " ", true, s, com);
-        if (model.addObject(c)) {
-            System.out.println("thanh cong");
-        } else {
-            System.out.println("that bai");
-        }
+//        Car c = new Car(5, "giường nằm", "19L-1234", "vàng", "30", "30", "toyota", "5h", "8h", "150", "xe êm", "đang áp dụng", " ", " ", true, s, com);
+//        if (model.addObject(c)) {
+//            System.out.println("thanh cong");
+//        } else {
+//            System.out.println("that bai");
+//        }
     }
 }

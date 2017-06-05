@@ -22,7 +22,6 @@ public class Car{
     public static final String CARNUMBER = "";
     public static final String COLOR = "";
     public static final String NUMBEROFSEAT = "";
-    public static final String NUMBERVAILABLE = "";
     public static final String COMPANY = "";
     public static final String TIMESTART = "";
     public static final String TIMECOME = "";
@@ -55,10 +54,6 @@ public class Car{
     @Column(name = "numberOfseat")
     @Size(min = 1,max = 50)
     private String numberOfseat;
-    
-    @Column(name = "numaVailable")
-    @Size(min = 1,max = 50)
-    private String numaVailable;
     
     @Column(name = "company")
     @Size(min = 1,max = 100)
@@ -106,24 +101,27 @@ public class Car{
     @OneToMany(mappedBy = "car",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<Ticket> tickets;
     
+    @OneToMany(mappedBy = "car",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private List<NgayDi> ngaydi;
+    
     public Car() {
-        this(Car.CARID, Car.CARTYPE, Car.NUMBEROFSEAT, Car.COLOR, Car.NUMBEROFSEAT,Car.NUMBERVAILABLE, Car.COMPANY,Car.TIMESTART,Car.TIMECOME, Car.PRICETICKET, Car.NOTE, Car.STATUS, Car.DATECREATE, Car.DATELAST, Car.FLAG,Car.SCHE,Car.COM);
+        this(Car.CARID, Car.CARTYPE, Car.NUMBEROFSEAT, Car.COLOR, Car.NUMBEROFSEAT, Car.COMPANY,Car.TIMESTART,Car.TIMECOME, Car.PRICETICKET, Car.NOTE, Car.STATUS, Car.DATECREATE, Car.DATELAST, Car.FLAG,Car.SCHE,Car.COM);
         schedule = new Schedule();
         com = new Company();
         tickets = new ArrayList<Ticket>();
+        ngaydi = new ArrayList<>();
     }
 
     public Car(int carId) {
         this.carId = carId;
     }
 
-    public Car(int carId, String carType, String numberCar, String color, String numberOfseat, String numaVailable, String company, String timeStart, String timeCome, String priceTicket, String note, String status, String dateCreate, String dateCreateLast, boolean flag, Schedule schedule, Company com) {
+    public Car(int carId, String carType, String numberCar, String color, String numberOfseat, String company, String timeStart, String timeCome, String priceTicket, String note, String status, String dateCreate, String dateCreateLast, boolean flag, Schedule schedule, Company com) {
         this.carId = carId;
         this.carType = carType;
         this.numberCar = numberCar;
         this.color = color;
         this.numberOfseat = numberOfseat;
-        this.numaVailable = numaVailable;
         this.company = company;
         this.timeStart = timeStart;
         this.timeCome = timeCome;
@@ -138,6 +136,7 @@ public class Car{
         schedule = new Schedule();
         com = new Company();
         tickets = new ArrayList<Ticket>();
+        ngaydi = new ArrayList<>();
     }
 
 
@@ -191,15 +190,7 @@ public class Car{
     public void setNumberOfseat(String numberOfseat) {
         this.numberOfseat = numberOfseat;
     }
-
-    public String getNumaVailable() {
-        return numaVailable;
-    }
-
-    public void setNumaVailable(String numaVailable) {
-        this.numaVailable = numaVailable;
-    }
-    
+ 
     public String getCompany() {
         return company;
     }
@@ -295,7 +286,14 @@ public class Car{
     public void setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
     }
-    
+
+    public List<NgayDi> getNgaydi() {
+        return ngaydi;
+    }
+
+    public void setNgaydi(List<NgayDi> ngaydi) {
+        this.ngaydi = ngaydi;
+    }
     
 
     @Override

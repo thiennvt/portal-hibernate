@@ -86,7 +86,6 @@ public class Schedule{
         this(SCHEDULEID, ROUTE, KILOMETTER,DATESTART,PLACESTART, PLACECOME, NOTE, STATUS,DATECREATE, DATELAST, FLAG);
         company = new Company();
         cars = new ArrayList<Car>();
-
     }
 
     public Schedule(int scheduleId, String route, String kilometer, String dateStart, String placeStart, String placeCome, String note, String status, String dateCreate, String dateCreateLast, boolean flag) {
@@ -215,8 +214,6 @@ public class Schedule{
         this.cars = cars;
     }
 
-
-    
     public Car addCar(Car car) {
         this.cars.add(car);
         car.setSchedule(this);

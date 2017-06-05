@@ -64,10 +64,6 @@
                                     <td><s:input path="numberOfseat"  class="form-control text-center"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Number Available</th>
-                                    <td><s:input path="numaVailable"  class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
                                     <th>Lable</th>
                                     <td><s:input path="company"  class="form-control text-center"/></td>
                                 </tr>
