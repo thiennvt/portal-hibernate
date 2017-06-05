@@ -160,9 +160,12 @@ public class TicketModel extends BaseModel<Ticket> {
     public boolean DeleteObject(Ticket instence) {
         session = sf.openSession();
         try {
-            String hql = "update Ticket t set t.flag = 0 where t.ticketId = :id";
+            String hql = "update Ticket t set t.reasonCancel=:reasonCancel,t.priceCancel=:priceCancel, t.flag = 0 where t.ticketId = :id ";
             tran = session.beginTransaction();
             Query query = session.createQuery(hql);
+            Double priceCancel = Float.parseFloat(instence.getPrice())*0.03;
+            query.setParameter("reasonCancel", "vợ đẻ");
+            query.setParameter("priceCancel", String.valueOf(priceCancel));
             query.setParameter("id", instence.getTicketId());
             int rowCount = query.executeUpdate();
             tran.commit();
@@ -197,11 +200,11 @@ public class TicketModel extends BaseModel<Ticket> {
         return null;
     }
 
-    public ArrayList<Ticket> getAllTicketCancel() {
+    public ArrayList<Ticket> getAllTicketCancel(int companyId) {
         session = sf.openSession();
         ArrayList<Ticket> listTiket;
         try {
-            String hql = "from Ticket t where t.priceCancel>0 and t.flag = 1 order by t.ticketId desc";
+            String hql = "from Ticket t where t.company = " + companyId + " and t.flag = 0 order by t.ticketId desc";
             tran = session.beginTransaction();
             listTiket = (ArrayList<Ticket>) session.createQuery(hql).list();
             tran.commit();

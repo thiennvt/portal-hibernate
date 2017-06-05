@@ -154,7 +154,7 @@
                             <ul class="danhSachChuyen">
                                 <li class="Chuyen1">
                                     <span class="gia"><a href="<c:url value="/schedule/SearchScheduleByIdClient.htm?scheduleId=${schedule.scheduleId}"/>"class="btn btn-warning pull-right" >DS xe chạy</a></span>
-                                    <span class="pull-left gia" style="font-size: 13px;font-weight: bold;color: red;padding-top: 5px">${schedule.company.name}</span>
+                                    <span class="gia" style="font-size: 13px;font-weight: bold;color: red;padding-top: 5px">${schedule.company.name}</span>
                                     <span class="gia"><a href="<c:url value="/schedule/SearchScheduleByIdClient.htm?scheduleId=${schedule.scheduleId}"/>" style="font-weight: bold;font-size: 18px">${schedule.placeStart} → ${schedule.placeCome}</a></span>
                                 </li>
                                 <br>										

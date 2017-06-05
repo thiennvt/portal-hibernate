@@ -160,20 +160,20 @@ public class CarModel extends BaseModel<Car> {
             tran = session.beginTransaction();
             Query query = session.createQuery(hql);
             int numaVailable = Integer.parseInt(instence.getNumaVailable()) - Integer.parseInt(quanticket);
-                query.setParameter("numaVailable", String.valueOf(numaVailable));
-                query.setParameter("id", instence.getCarId());
-                int rowCount = query.executeUpdate();
-                tran.commit();
-                check = true;
-            }catch (HibernateException e) {
+            query.setParameter("numaVailable", String.valueOf(numaVailable));
+            query.setParameter("id", instence.getCarId());
+            int rowCount = query.executeUpdate();
+            tran.commit();
+            check = true;
+        } catch (HibernateException e) {
             tran.rollback();
             e.printStackTrace();
-        }finally {
+        } finally {
             session.close();
         }
-            return check;
-        }
-    
+        return check;
+    }
+
     public boolean UpdateNumAvailableCar(Car instence, String quanticket) {
         session = sf.openSession();
         boolean check = false;
@@ -184,42 +184,39 @@ public class CarModel extends BaseModel<Car> {
             tran = session.beginTransaction();
             Query query = session.createQuery(hql);
             int numaVailable = Integer.parseInt(instence.getNumaVailable()) + Integer.parseInt(quanticket);
-                query.setParameter("numaVailable", String.valueOf(numaVailable));
-                query.setParameter("id", instence.getCarId());
-                int rowCount = query.executeUpdate();
-                tran.commit();
-                check = true;
-            }catch (HibernateException e) {
+            query.setParameter("numaVailable", String.valueOf(numaVailable));
+            query.setParameter("id", instence.getCarId());
+            int rowCount = query.executeUpdate();
+            tran.commit();
+            check = true;
+        } catch (HibernateException e) {
             tran.rollback();
             e.printStackTrace();
-        }finally {
+        } finally {
             session.close();
         }
-            return check;
-        }
+        return check;
+    }
 
-
-        @Override
-        public boolean DeleteObject(Car instence) {
+    @Override
+    public boolean DeleteObject(Car instence) {
         session = sf.openSession();
-            try {
-                String hql = "update Car c set c.flag = 0 where c.carId = :id";
-                tran = session.beginTransaction();
-                Query query = session.createQuery(hql);
-                query.setParameter("id", instence.getCarId());
-                int rowCount = query.executeUpdate();
-                tran.commit();
-                return true;
-            } catch (HibernateException e) {
-                tran.rollback();
-                e.printStackTrace();
-            } finally {
-                session.close();
-            }
-            return false;
+        try {
+            String hql = "update Car c set c.flag = 0 where c.carId = :id";
+            tran = session.beginTransaction();
+            Query query = session.createQuery(hql);
+            query.setParameter("id", instence.getCarId());
+            int rowCount = query.executeUpdate();
+            tran.commit();
+            return true;
+        } catch (HibernateException e) {
+            tran.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
         }
-
-    
+        return false;
+    }
 
     public ArrayList<Car> getAllCar(int companyId) {
         session = sf.openSession();

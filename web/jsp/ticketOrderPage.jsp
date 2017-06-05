@@ -87,7 +87,7 @@
                                         <td>${ticket.status}</td>
                                         <td><a class="update" style="color: blue" href="<c:url value="/car/initCarDetail.htm?carId=${ticket.car}" />" style="color: blue;">${ticket.car}</a></td>
                                         <td><a class="update" style="color: blue" href="<c:url value="initUpdateTicketOrder.htm?ticketId=${ticket.ticketId}" />">Update</a></td>
-                                        <td><a onclick="confirmDelete()" style="color: red" class="update" style="color: red" href="<c:url value="initDeleteTicket.htm?ticketId=${ticket.ticketId}&companyId=${sessionScope.id}" />">Delete</a></td>
+                                        <td><a onclick="confirmDelete()" style="color: red" class="update" style="color: red" href="<c:url value="initDeleteTicket.htm?ticketId=${ticket.ticketId}&companyId=${sessionScope.id}" />">Cancel</a></td>
                                     </tr> 
                                 </c:forEach>
                             </tbody>

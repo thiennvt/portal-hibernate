@@ -49,10 +49,10 @@ public class TicketController {
 
     //lất toàn bộ vé hủy
     @RequestMapping(value = "/getAllTicketCancel")
-    public ModelAndView getAllTicketCancel() {
+    public ModelAndView getAllTicketCancel(@RequestParam("companyId") int companyId) {
         try {
             ModelAndView model = new ModelAndView("/ticketCancelPage");
-            ArrayList<Ticket> listTicketCancel = ticModel.getAllTicketCancel();
+            ArrayList<Ticket> listTicketCancel = ticModel.getAllTicketCancel(companyId);
             model.addObject("listCancel", listTicketCancel);
             return model;
         } catch (Exception e) {
@@ -139,7 +139,7 @@ public class TicketController {
         Ticket tic = ticModel.getObject(ticket.getTicketId());
         String ticQuantity = tic.getQuanTicket();
         try {
-            if (ticModel.DeleteObject(ticket)) {
+            if (ticModel.DeleteObject(tic)) {
                 CarModel carModel = new CarModel();
                 Car car = carModel.getObject(tic.getCar().getCarId());
                 if (carModel.UpdateNumAvailableCar(car, ticQuantity)) {
