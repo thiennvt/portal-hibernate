@@ -213,14 +213,18 @@ public class ScheduleController {
     @RequestMapping(value = "/SearchScheduleByIdClient")
     public ModelAndView SearchScheduleByIdClient(@ModelAttribute("schedule") Schedule sche, @RequestParam("scheduleId") int scheduleId, HttpSession session) {
         try {
-            ModelAndView model = new ModelAndView("/showScheduleOrder");
+            ModelAndView model = new ModelAndView("/showScheduleOrderById");
             Schedule schedule = scheMdel.getObject(scheduleId);
             model.addObject("schedule", sche);
+            
             session.setAttribute("diemdau", schedule.getPlaceStart().toUpperCase());
             session.setAttribute("diemcuoi", schedule.getPlaceCome().toUpperCase());
             
             ArrayList<Car> listCar = scheMdel.getAllCarByScheduleId(sche);
             model.addObject("listCar", listCar);
+            
+            ArrayList<String> listChotrong = scheMdel.getChoTrong(sche);
+            model.addObject("listChotrong", listChotrong);
             return model;
         } catch (Exception e) {
             e.printStackTrace();

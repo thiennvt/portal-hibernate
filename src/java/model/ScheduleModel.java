@@ -264,28 +264,6 @@ public class ScheduleModel extends BaseModel<Schedule> {
         return null;
     }
 
-    //lấy danh sách xe thông qua một lịch trình đã tìm được
-    public ArrayList<Car> getAllCarByScheduleId(Schedule sche) {
-        ArrayList<Car> listCar = new ArrayList<>();
-        Schedule schedule = getObject(sche.getScheduleId());
-        try {
-            int scheduleId = schedule.getScheduleId();
-            session = sf.openSession();
-            String hql = "from Car c where c.flag = 1 and c.schedule = " + scheduleId + "";
-            tran = session.beginTransaction();
-            listCar = (ArrayList<Car>) session.createQuery(hql).list();
-            tran.commit();
-            return listCar;
-        } catch (Exception e) {
-            tran.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
-        return null;
-    }
-
     //lấy danh sách xe với số ghế trống và ngày đi trong bảng ngày đi
     public ArrayList<String> getAllNgayDi(Schedule schedule) {
         ArrayList<Car> listCarId = getAllCarBySchedule(schedule);
@@ -317,16 +295,73 @@ public class ScheduleModel extends BaseModel<Schedule> {
         } finally {
             session.close();
         }
+        return null;
+    }
+    //lấy danh sách xe thông qua một lịch trình đã tìm được
+    public ArrayList<Car> getAllCarByScheduleId(Schedule sche) {
+        ArrayList<Car> listCar = new ArrayList<>();
+        Schedule schedule = getObject(sche.getScheduleId());
+        try {
+            int scheduleId = schedule.getScheduleId();
+            session = sf.openSession();
+            String hql = "from Car c where c.flag = 1 and c.schedule = " + scheduleId + "";
+            tran = session.beginTransaction();
+            listCar = (ArrayList<Car>) session.createQuery(hql).list();
+            tran.commit();
+            return listCar;
+        } catch (Exception e) {
+            tran.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
 
         return null;
     }
+    
+    //lấy danh sách chỗ trống của từng xe theo một lịch trình
+    public ArrayList<String> getChoTrong(Schedule schedule) {
+        ArrayList<Car> listCarId = getAllCarByScheduleId(schedule);
+        ArrayList<String> listNgaydi = new ArrayList<>();
+        String ngaydi = schedule.getDateStart();
+        CarModel carModel = new CarModel();
+        try {
+            for (int i = 0; i < listCarId.size(); i++) {
+                int carId = listCarId.get(i).getCarId();
+                session = sf.openSession();
+                String hql = "from NgayDi n where n.car = ? and n.ngayDi = '" + ngaydi + "'";
+                tran = session.beginTransaction();
+                NgayDi items = (NgayDi) session.createQuery(hql).setInteger(0, carId).uniqueResult();
+                tran.commit();
+                if (items != null) {
+                    listNgaydi.add(items.toString());
+                }
+                else
+                {
+                   Car itemsCar = carModel.getObject(carId);
+                   listNgaydi.add(itemsCar.getNumberOfseat());
+                }
+            }
+            return listNgaydi;
+        } catch (Exception e) {
+            tran.rollback();
+            e.printStackTrace();
+
+        } finally {
+            session.close();
+        }
+        return null;
+    }
+
+    
 
     public static void main(String[] args) {
         ScheduleModel model = new ScheduleModel();
         Schedule sche = new Schedule(1, "Hải Phòng - Yên Bái", " 150km", "01/06/2017", "Yên Bái", "Hải phòng", " dang hoat dong", " dang hoat dong", "01/01/2017", " ", true);
 //        ArrayList<Car> list = model.getAllCarByScheduleId(sche);
 //        ArrayList<Car> list = model.getAllCarByScheduleId(sche);
-        ArrayList<String> list = model.getAllNgayDi(sche);
+//        ArrayList<String> list = model.getAllNgayDi(sche);
+        ArrayList<String> list = model.getChoTrong(sche);
         for (String s : list) {
             System.out.println(s);
         }
