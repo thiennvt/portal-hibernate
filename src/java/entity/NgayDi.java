@@ -78,7 +78,5 @@ public class NgayDi {
     public String toString() {
         return getSoGheTrong();
     }
-    
-    
-    
+
 }

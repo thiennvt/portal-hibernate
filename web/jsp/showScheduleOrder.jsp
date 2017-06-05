@@ -5,6 +5,8 @@
 --%>
 
 
+<%@page import="entity.Car"%>
+<%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -61,7 +63,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6 col-md-push-3 col-lg-6 col-lg-push-3">
                     <div style="padding-top: 70px">
-                        
+
                     </div>
                 </div>
             </div>
@@ -70,7 +72,7 @@
             <div class="row">
                 <!-- cái này theo t ko cần đầu vì nó hơi vướng tầm nhìn nhưng tùy m nếu vẫn nuốn thì cho xuống cuối ý ưu tiên danh sách lịch trình -->
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    
+
                 </div>
             </div>
 
@@ -89,22 +91,28 @@
                                 <th>Loại xe</th>
                                 <th>Biển số</th>
                                 <th>Số chỗ ngồi</th>
+                                <th>Số chỗ trống</th>
                                 <th>Giá vé</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="car" items="${listCar}">
-                                <tr class="scheduleInfo">
-                                    <td>${car.carId}</td>
-                                    <td>${car.com.name}</td>
-                                    <td>${car.carType}</td>
-                                    <td>${car.numberCar}</td>
-                                    <td>${car.numberOfseat}</td>
-                                    <td>${car.priceTicket}</td>
-                                    <td><a href="<c:url value="/schedule/orderTicketDetail.htm?scheduleId=${car.schedule.scheduleId}&carId=${car.carId}"/>"><button class="btn btn-warning pull-right">Đặt Vé</button></a></td>
-                                </tr>
-                            </c:forEach>
+                            <%
+                                ArrayList<String> listGheTrong = (ArrayList<String>) request.getAttribute("listChotrong");
+                                ArrayList<Car> listCar = (ArrayList<Car>) request.getAttribute("listCar");
+                                for (int i = 0; i < listCar.size(); i++) {
+                                    out.print("<tr class=\"scheduleInfo\">");
+                                    out.print("<td>" + listCar.get(i).getCarId() + "</td>");
+                                    out.print("<td>" + listCar.get(i).getCom().getName() + "</td>");
+                                    out.print("<td>" + listCar.get(i).getCarType() + "</td>");
+                                    out.print("<td>" + listCar.get(i).getNumberCar() + "</td>");
+                                    out.print("<td>" + listCar.get(i).getNumberOfseat() + "</td>");
+                                    out.print("<td>" + listGheTrong.get(i).toString() + "</td>");
+                                    out.print("<td>" + listCar.get(i).getPriceTicket() + "</td>");
+                                    out.print("<td><a href=\"/WebApplication.teamfive/schedule/orderTicketDetail.htm?scheduleId="+listCar.get(i).getSchedule().getScheduleId()+"&carId="+listCar.get(i).getCarId()+"\">Đặt vé</a></td>");
+                                    out.print("</tr>");
+                                }
+                            %>
                         </tbody>
                     </table>
                 </div>

@@ -7,6 +7,7 @@ package controller;
 
 import entity.Car;
 import entity.Company;
+import entity.NgayDi;
 import entity.Schedule;
 import entity.Ticket;
 import java.io.IOException;
@@ -187,8 +188,14 @@ public class ScheduleController {
         try {
             ModelAndView model = new ModelAndView("/showScheduleOrder");
 //            ArrayList<Car> listCar = scheMdel.getAllCarBySchedule(sche);
+            //lấy ra danh sách xe
             ArrayList<Car> listCar = scheMdel.getAllCarBySchedule(sche);
             model.addObject("listCar", listCar);
+            
+            //lấy ra số ghế trống của từng xe
+            ArrayList<String> listChotrong = scheMdel.getAllNgayDi(sche);
+            model.addObject("listChotrong", listChotrong);
+            
             session.setAttribute("diemdau", sche.getPlaceStart().toUpperCase());
             session.setAttribute("diemcuoi", sche.getPlaceCome().toUpperCase());
             session.setAttribute("dateStart", sche.getDateStart());
@@ -235,6 +242,8 @@ public class ScheduleController {
 
             CarModel carModel = new CarModel();
             Car car = carModel.getObject(carId);
+            
+            
             session.setAttribute("carId1", car.getCarId());
             mm.put("carNumber", car.getNumberCar());
             mm.put("price", car.getPriceTicket());

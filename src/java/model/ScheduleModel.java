@@ -287,10 +287,11 @@ public class ScheduleModel extends BaseModel<Schedule> {
     }
 
     //lấy danh sách xe với số ghế trống và ngày đi trong bảng ngày đi
-    public ArrayList<NgayDi> getAllNgayDi(Schedule schedule) {
+    public ArrayList<String> getAllNgayDi(Schedule schedule) {
         ArrayList<Car> listCarId = getAllCarBySchedule(schedule);
-        ArrayList<NgayDi> listNgaydi = new ArrayList<>();
+        ArrayList<String> listNgaydi = new ArrayList<>();
         String ngaydi = schedule.getDateStart();
+        CarModel carModel = new CarModel();
         try {
             for (int i = 0; i < listCarId.size(); i++) {
                 int carId = listCarId.get(i).getCarId();
@@ -300,7 +301,12 @@ public class ScheduleModel extends BaseModel<Schedule> {
                 NgayDi items = (NgayDi) session.createQuery(hql).setInteger(0, carId).uniqueResult();
                 tran.commit();
                 if (items != null) {
-                    listNgaydi.add(items);
+                    listNgaydi.add(items.toString());
+                }
+                else
+                {
+                   Car itemsCar = carModel.getObject(carId);
+                   listNgaydi.add(itemsCar.getNumberOfseat());
                 }
             }
             return listNgaydi;
@@ -317,11 +323,11 @@ public class ScheduleModel extends BaseModel<Schedule> {
 
     public static void main(String[] args) {
         ScheduleModel model = new ScheduleModel();
-        Schedule sche = new Schedule(1, "Hải Phòng - Thanh Hóa", " 150km", "01/06/2017", "Yên Bái", "Hải phòng", " dang hoat dong", " dang hoat dong", "01/01/2017", " ", true);
+        Schedule sche = new Schedule(1, "Hải Phòng - Yên Bái", " 150km", "01/06/2017", "Yên Bái", "Hải phòng", " dang hoat dong", " dang hoat dong", "01/01/2017", " ", true);
 //        ArrayList<Car> list = model.getAllCarByScheduleId(sche);
 //        ArrayList<Car> list = model.getAllCarByScheduleId(sche);
-        ArrayList<NgayDi> list = model.getAllNgayDi(sche);
-        for (NgayDi s : list) {
+        ArrayList<String> list = model.getAllNgayDi(sche);
+        for (String s : list) {
             System.out.println(s);
         }
 
@@ -335,5 +341,6 @@ public class ScheduleModel extends BaseModel<Schedule> {
     //} else {
     //   System.out.println("that bai");
     //}
+
 
 }
