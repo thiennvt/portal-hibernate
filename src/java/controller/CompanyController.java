@@ -167,7 +167,7 @@ public class CompanyController {
     }
 
     //==================================================
-    //thêm nhà xe
+    //thêm nhà xe .hiển thị trang đăng kí
     @RequestMapping(value = "/initInsertCompany")
     public ModelAndView initInsertCpmpany() {
         ModelAndView model = new ModelAndView("/companyRegister");
@@ -176,7 +176,7 @@ public class CompanyController {
     }
 
     //==================================================
-    //xử lí thêm nhà xe
+    //xử lí thêm nhà xe( xử lí đăng kí)
     @RequestMapping(value = "/handleInsertCompany")
     public String handleInsertCompany(@ModelAttribute("newCompany") Company com) {
         boolean check = comModel.addObject(com);
@@ -197,7 +197,7 @@ public class CompanyController {
     
     //==================================================
 
-    //cập nhật nhà xe khi mới đăng kí
+    //cập nhật nhà xe khi mới đăng kí (hiển thị dòng thông báo chờ xác nhận)
     @RequestMapping(value = "/initUpdateCompamy")
     public ModelAndView initUpdateCompany(@RequestParam("companyId") int companyId) {
         ModelAndView model = new ModelAndView("/companyUpdateRegister");
@@ -207,7 +207,7 @@ public class CompanyController {
     }
 
     //==================================================
-    //xử lí cập nhật nhà xe sau khi đăng kí
+    //xử lí cập nhật thêm một số thông tin trong khi chờ xác nhận
     @RequestMapping(value = "/handleUpdateCompany")
     public String handleUpdateCompany(@ModelAttribute("updateCompany") Company com) {
         if (comModel.UpdateObject(com)) {
@@ -219,7 +219,7 @@ public class CompanyController {
     }
 
     //==================================================
-    //cập nhật thông tin đầy đủ của nhà xe
+    //hiển thị trang cập nhật đầy đủ thông tin sau khi đã xác nhận
     @RequestMapping(value = "/initUpdateCompanyDetial")
     public ModelAndView initUpdateCompanyDetial(@RequestParam("companyId") int companyId) {
         ModelAndView model = new ModelAndView("/companyUpdate");
@@ -230,7 +230,7 @@ public class CompanyController {
     
     //==================================================
 
-    //xử lí cập nhật full
+    //xử lí cập nhật đầy đủ 
     @RequestMapping(value = "/handleUpdateCompanyDetialClient")
     public String handleUpdateCompanyDetialClient(@ModelAttribute("updateCompany") Company com) {
         if (comModel.UpdateCompanyDetail(com)) {
