@@ -149,54 +149,6 @@ public class CarModel extends BaseModel<Car> {
         return check;
     }
 
-    public boolean UpdateCar(Car instence, String quanticket) {
-        session = sf.openSession();
-        boolean check = false;
-        try {
-            String hql = "update Car c "
-                    + "set c.numaVailable = :numaVailable "
-                    + "where c.carId = :id";
-            tran = session.beginTransaction();
-            Query query = session.createQuery(hql);
-            int numaVailable = Integer.parseInt(quanticket);
-            query.setParameter("numaVailable", String.valueOf(numaVailable));
-            query.setParameter("id", instence.getCarId());
-            int rowCount = query.executeUpdate();
-            tran.commit();
-            check = true;
-        } catch (HibernateException e) {
-            tran.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-        return check;
-    }
-
-    public boolean UpdateNumAvailableCar(Car instence, String quanticket) {
-        session = sf.openSession();
-        boolean check = false;
-        try {
-            String hql = "update Car c "
-                    + "set c.numaVailable = :numaVailable "
-                    + "where c.carId = :id";
-            tran = session.beginTransaction();
-            Query query = session.createQuery(hql);
-            int numaVailable =  Integer.parseInt(quanticket);
-            query.setParameter("numaVailable", String.valueOf(numaVailable));
-            query.setParameter("id", instence.getCarId());
-            int rowCount = query.executeUpdate();
-            tran.commit();
-            check = true;
-        } catch (HibernateException e) {
-            tran.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-        return check;
-    }
-
     @Override
     public boolean DeleteObject(Car instence) {
         session = sf.openSession();

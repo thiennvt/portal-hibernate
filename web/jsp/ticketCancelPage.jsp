@@ -56,12 +56,9 @@
                                     <td><label>Customer Name</label></td>
                                     <td><label>Email</label></td>
                                     <td><label>Phone</label></td>
-                                    <td><label>Ticket Type</label></td>
-                                    <td><label>Number Seat</label></td>
+                                    <td><label>Quantity ticket</label></td>
                                     <td><label>Price</label></td>
                                     <td><label>Date Order</label></td>
-                                    <td><label>Note</label></td>
-                                    <td><label>Status</label></td>
                                     <td><label>Reson Cancel</label></td>
                                     <td><label>Price Cancel</label></td>
                                     <td><label>Car order</label></td>
@@ -75,16 +72,13 @@
                                         <td>${ticket.customerName}</td>
                                         <td>${ticket.email}</td>
                                         <td>${ticket.phone}</td>
-                                        <td>${ticket.ticketType}</td>
-                                        <td>${ticket.numberOfSeat}</td>
+                                        <td>${ticket.quanTicket}</td>
                                         <td>${ticket.price}</td>
                                         <td>${ticket.dateOrder}</td>
-                                        <td>${ticket.note}</td>
-                                        <td>${ticket.status}</td>
                                         <td>${ticket.reasonCancel}</td>
                                         <td>${ticket.priceCancel}</td>
                                         <td><a class="update" style="color: blue" href="<c:url value="/car/initCarDetail.htm?carId=${ticket.car}" />" style="color: blue;">${ticket.car}</a></td>
-                                        <td><a class="update" style="color: blue" href="<c:url value="initUpdateTicket.htm?ticketId=${ticket.ticketId}" />">Update</a></td>
+<!--                                        <td><a class="update" style="color: blue" href="\<c:url value="initUpdateTicket.htm?ticketId=\${ticket.ticketId}" />">Update</a></td>-->
                                         <td><a onclick="confirmDelete()" style="color: red" class="update" style="color: red" href="<c:url value="initDeleteTicket.htm?ticketId=${ticket.ticketId}" />">Delete</a></td>
                                     </tr> 
                                 </c:forEach>

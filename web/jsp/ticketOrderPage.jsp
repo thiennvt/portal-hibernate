@@ -53,17 +53,14 @@
                             <thead>
                                 <tr class="info text-center">
                                     <td><label>ID </label></td>
-                                    <td><label>Ticket Type</label></td>
                                     <td><label>Customer Name</label></td>
                                     <td><label>Address</label></td>
                                     <td><label>Email</label></td>
                                     <td><label>Phone</label></td>
                                     <td><label>Quantity Ticket</label></td>
-                                    <td><label>Number Seat</label></td>
                                     <td><label>Date Start</label></td>
                                     <td><label>Price</label></td>
                                     <td><label>Date Order</label></td>
-                                    <td><label>Note</label></td>
                                     <td><label>Status</label></td>
                                     <td><label>Car order</label></td>
                                     <td colspan="2">Action</td>
@@ -73,17 +70,14 @@
                                 <c:forEach var="ticket" items="${listTicket}">
                                     <tr class="warning">
                                         <td>${ticket.ticketId}</td>
-                                        <td>${ticket.ticketType}</td>
                                         <td>${ticket.customerName}</td>
                                         <td>${ticket.address}</td>
                                         <td>${ticket.email}</td>
                                         <td>${ticket.phone}</td>
                                         <td>${ticket.quanTicket}</td>
-                                        <td>${ticket.numberOfSeat}</td>
                                         <td>${ticket.dateStart}</td>
-                                        <td>${ticket.price}</td>
+                                        <td>${ticket.price}000(VND)</td>
                                         <td>${ticket.dateOrder}</td>
-                                        <td>${ticket.note}</td>
                                         <td>${ticket.status}</td>
                                         <td><a class="update" style="color: blue" href="<c:url value="/car/initCarDetail.htm?carId=${ticket.car}" />" style="color: blue;">${ticket.car}</a></td>
                                         <td><a class="update" style="color: blue" href="<c:url value="initUpdateTicketOrder.htm?ticketId=${ticket.ticketId}" />">Update</a></td>

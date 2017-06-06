@@ -288,11 +288,14 @@ public class ScheduleController {
             TicketModel ticketModel = new TicketModel();
             boolean check = ticketModel.addObject(tic);
             if (check) {
+                //lấy mã xe 
                 String carId = session.getAttribute("carId1").toString();
-                String ScheduleId1 = tic.getQuanTicket();
+                String soluongve = tic.getQuanTicket();
                 String ngay = session.getAttribute("dateStart").toString();
+                //lấy ngày đi theo mã xe và ngày đi
                 NgayDi ngaydi = scheMdel.gheTrongNgayDi(Integer.parseInt(carId), ngay);
-                if (scheMdel.UpdateSoChoTrong(ngaydi, ScheduleId1)) {
+                //cập nhật số chỗ khi khách hàng điền thông tin đặt vé
+                if (scheMdel.UpdateSoChoTrong(ngaydi, soluongve)) {
                     ModelAndView modelPayment = new ModelAndView("/paymentPage");
 //            session.setAttribute("ticketId", tic.getTicketId());
                     session.setAttribute("email", tic.getEmail());

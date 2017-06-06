@@ -6,9 +6,11 @@
 package controller;
 
 import entity.Car;
+import entity.NgayDi;
 import entity.Ticket;
 import java.util.ArrayList;
 import model.CarModel;
+import model.ScheduleModel;
 import model.TicketModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -137,13 +139,14 @@ public class TicketController {
     @RequestMapping(value = "/initDeleteTicket")
     public ModelAndView initAdminDeleteSchedule(@ModelAttribute("schedule") Ticket ticket, @RequestParam("companyId") int companyId) {
         Ticket tic = ticModel.getObject(ticket.getTicketId());
+        int carId = tic.getCar().getCarId();
         String ticQuantity = tic.getQuanTicket();
+        String ngay = tic.getDateStart();
         try {
             if (ticModel.DeleteObject(tic)) {
-                CarModel carModel = new CarModel();
-                Car car = carModel.getObject(tic.getCar().getCarId());
-                
-                if (carModel.UpdateNumAvailableCar(car, ticQuantity)) {
+                ScheduleModel scheduleModel = new ScheduleModel();
+                NgayDi ngaydi = scheduleModel.gheTrongNgayDi(carId, ngay);
+                if (scheduleModel.UpdateSoChoTrongKhiHuy(ngaydi, ticQuantity)) {
                     ModelAndView model = new ModelAndView("/ticketOrderPage");
                     ArrayList<Ticket> listTicket = ticModel.getAllTicketOrder(companyId);
                     model.addObject("listTicket", listTicket);

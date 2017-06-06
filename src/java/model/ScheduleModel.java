@@ -465,7 +465,7 @@ public class ScheduleModel extends BaseModel<Schedule> {
         }
         else
         {
-            System.out.println("that bai");
+            System.out.println("that");
         }
     }
 }
