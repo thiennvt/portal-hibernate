@@ -14,6 +14,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import util.HibernateUtil;
 
 /**
  *
@@ -71,7 +72,8 @@ public class CompanyModel extends BaseModel<Company> {
         boolean check = false;
         Company com = new Company();
         try {
-            sf.getCurrentSession().beginTransaction();
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
             com.setAccountName(instence.getAccountName());
             com.setAddress(" ");
             Calendar cal = Calendar.getInstance();
@@ -88,13 +90,15 @@ public class CompanyModel extends BaseModel<Company> {
             com.setPassword(instence.getPassword());
             com.setPhone(instence.getPhone());
             com.setStatus(false);
-
-            sf.getCurrentSession().save(com);
-            sf.getCurrentSession().getTransaction().commit();
+            
+            session.save(com);
+            session.getTransaction().commit();
             check = true;
         } catch (Exception e) {
-            sf.getCurrentSession().getTransaction().rollback();
+            session.getTransaction().rollback();
             e.printStackTrace();
+        } finally{
+            session.close();
         }
         return check;
     }
@@ -274,7 +278,7 @@ public class CompanyModel extends BaseModel<Company> {
     
     public static void main(String[] args) {
         CompanyModel model = new CompanyModel();
-        Company u1 = new Company(13, "a", "0"," ", "0", "0", "0", "0", "0", "0", "0", "0", true, true);
+        Company u1 = new Company(13, "a", "0"," ", "0", "0", "0", "0", "0", "0", "0", true, true);
 //        boolean  check = model.UpdateObject(u1);
 //        if (check) {
 //            System.out.println("thanh cong");

@@ -179,10 +179,11 @@ public class CompanyController {
     //xử lí thêm nhà xe
     @RequestMapping(value = "/handleInsertCompany")
     public String handleInsertCompany(@ModelAttribute("newCompany") Company com) {
-        if (comModel.addObject(com)) {
+        boolean check = comModel.addObject(com);
+        if (check) {
             try {
-                EmailUtil.sendEmal(com.getEmail(), "Xác nhận đăng kí", "Bạn đã đăng kí thành công !.");
-                SMSUtil.sendSMS(com.getPhone(),"Bạn đã đăng kí thành công !.");
+                EmailUtil.sendEmal(com.getEmail(), "Thong bao dang ki", "Ban da dang ki thanh cong !.");
+                SMSUtil.sendSMS(com.getPhone(),"Ban da dang ki thanh cong !.");
             } catch (MessagingException ex) {
                 Logger.getLogger(CompanyController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {

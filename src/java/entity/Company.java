@@ -27,12 +27,11 @@ public class Company {
     public static final String EMAIL = "";
     public static final String PHONE = "";
     public static final String HOTLINE = "";
-    public static final String IMAGE = "";
     public static final String DATECREATE = "";
     public static final String DATELAST = "";
     public static final String NOTE = "";
     public static final boolean STATUS = false;
-    public static final boolean FLAG = false;
+    public static final boolean FLAG = true;
     @Id
     @Column(name = "companyId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,9 +65,6 @@ public class Company {
     @Size(min = 1, max = 50)
     private String hotline;
 
-    @Column(name = "image")
-    @Size(min = 1, max = 50)
-    private String image;
     
     @Column(name = "dateCreate")
     @Size(min = 1, max = 50)
@@ -98,13 +94,13 @@ public class Company {
     private List<Ticket> tickets;
     
     public Company() {
-        this(Company.COMPANYID, Company.NAME, Company.ACCOUNTNAME, Company.PASSWORD, Company.ADDRESS, Company.EMAIL, Company.PHONE, Company.HOTLINE,Company.IMAGE, Company.DATECREATE, Company.DATELAST, Company.NOTE, Company.STATUS, Company.FLAG);
+       this(COMPANYID, NAME, ACCOUNTNAME, PASSWORD, ADDRESS, EMAIL, PHONE, HOTLINE, DATECREATE, DATELAST, NOTE, STATUS, FLAG);
         cars = new ArrayList<Car>();
         sches = new ArrayList<>();
         tickets = new ArrayList<>();
     }
 
-    public Company(int companyId, String name, String accountName, String password, String address, String email, String phone, String hotline,String image, String dateCreate, String dateCreatelast, String note, boolean status, boolean flag) {
+    public Company(int companyId, String name, String accountName, String password, String address, String email, String phone, String hotline, String dateCreate, String dateCreatelast, String note, boolean status, boolean flag) {
         this.companyId = companyId;
         this.name = name;
         this.accountName = accountName;
@@ -113,16 +109,13 @@ public class Company {
         this.email = email;
         this.phone = phone;
         this.hotline = hotline;
-        this.image = image;
         this.dateCreate = dateCreate;
         this.dateCreatelast = dateCreatelast;
         this.note = note;
         this.status = status;
         this.flag = flag;
-        cars = new ArrayList<>();
-        sches = new ArrayList<>();
-        tickets = new ArrayList<>();
     }
+
 
     public Company(int companyId) {
         this.companyId = companyId;
