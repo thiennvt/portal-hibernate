@@ -142,6 +142,7 @@ public class TicketController {
             if (ticModel.DeleteObject(tic)) {
                 CarModel carModel = new CarModel();
                 Car car = carModel.getObject(tic.getCar().getCarId());
+                
                 if (carModel.UpdateNumAvailableCar(car, ticQuantity)) {
                     ModelAndView model = new ModelAndView("/ticketOrderPage");
                     ArrayList<Ticket> listTicket = ticModel.getAllTicketOrder(companyId);

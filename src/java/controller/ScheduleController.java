@@ -11,7 +11,10 @@ import entity.NgayDi;
 import entity.Schedule;
 import entity.Ticket;
 import java.io.IOException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import model.CarModel;
@@ -191,11 +194,11 @@ public class ScheduleController {
             //lấy ra danh sách xe
             ArrayList<Car> listCar = scheMdel.getAllCarBySchedule(sche);
             model.addObject("listCar", listCar);
-            
+
             //lấy ra số ghế trống của từng xe
             ArrayList<String> listChotrong = scheMdel.getAllNgayDi(sche);
             model.addObject("listChotrong", listChotrong);
-            
+
             session.setAttribute("diemdau", sche.getPlaceStart().toUpperCase());
             session.setAttribute("diemcuoi", sche.getPlaceCome().toUpperCase());
             session.setAttribute("dateStart", sche.getDateStart());
@@ -213,16 +216,22 @@ public class ScheduleController {
     @RequestMapping(value = "/SearchScheduleByIdClient")
     public ModelAndView SearchScheduleByIdClient(@ModelAttribute("schedule") Schedule sche, @RequestParam("scheduleId") int scheduleId, HttpSession session) {
         try {
-            ModelAndView model = new ModelAndView("/showScheduleOrderById");
+            ModelAndView model = new ModelAndView("/showScheduleOrder");
             Schedule schedule = scheMdel.getObject(scheduleId);
             model.addObject("schedule", sche);
-            
+
             session.setAttribute("diemdau", schedule.getPlaceStart().toUpperCase());
             session.setAttribute("diemcuoi", schedule.getPlaceCome().toUpperCase());
-            
+
+            Calendar calendar = Calendar.getInstance();
+            Date date = calendar.getTime();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String dateStart = sdf.format(date);
+            session.setAttribute("dateStart", dateStart);
+
             ArrayList<Car> listCar = scheMdel.getAllCarByScheduleId(sche);
             model.addObject("listCar", listCar);
-            
+
             ArrayList<String> listChotrong = scheMdel.getChoTrong(sche);
             model.addObject("listChotrong", listChotrong);
             return model;
@@ -236,25 +245,34 @@ public class ScheduleController {
     //==========================
     //hiện thị form điền thông tin lịch trình và form điền thông tin đặt vé xe
     @RequestMapping(value = "/orderTicketDetail")
-    public ModelAndView orderTicketDetail(@RequestParam("scheduleId") int scheduleId, @RequestParam("carId") int carId, ModelMap mm,HttpSession session) {
+    public ModelAndView orderTicketDetail(@RequestParam("scheduleId") int scheduleId, @RequestParam("carId") int carId, ModelMap mm, HttpSession session) {
         try {
             ModelAndView model = new ModelAndView("/ticketOrderClient");
             Schedule sche = scheMdel.getObject(scheduleId);
+
             mm.put("companyID", sche.getCompany());
             mm.put("companyName", sche.getCompany().getName());
             model.addObject("schedule", sche);
 
             CarModel carModel = new CarModel();
             Car car = carModel.getObject(carId);
-            
-            
             session.setAttribute("carId1", car.getCarId());
             mm.put("carNumber", car.getNumberCar());
-            mm.put("price", car.getPriceTicket());
             mm.put("numaberSeat", car.getNumberOfseat());
-
+            mm.put("price", car.getPriceTicket());
             Ticket ticket = new Ticket();
             model.getModelMap().put("ticket", ticket);
+            NgayDi sogheTrong = scheMdel.gheTrongNgayDi(carId, session.getAttribute("dateStart").toString());
+            if (sogheTrong == null) {
+                NgayDi objNgay = scheMdel.addONgayDi(car.getCarId(),session.getAttribute("dateStart").toString());
+                if (objNgay != null) {
+                    String numGhe = objNgay.getSoGheTrong();
+                    session.setAttribute("chocon", numGhe);
+                }
+            } else {
+                session.setAttribute("chocon", sogheTrong.getSoGheTrong());
+            }
+
             return model;
         } catch (Exception e) {
             e.printStackTrace();
@@ -272,9 +290,9 @@ public class ScheduleController {
             if (check) {
                 String carId = session.getAttribute("carId1").toString();
                 String ScheduleId1 = tic.getQuanTicket();
-                CarModel carModel = new CarModel();
-                Car car = carModel.getObject(Integer.parseInt(carId));
-                if (carModel.UpdateCar(car,ScheduleId1)) {
+                String ngay = session.getAttribute("dateStart").toString();
+                NgayDi ngaydi = scheMdel.gheTrongNgayDi(Integer.parseInt(carId), ngay);
+                if (scheMdel.UpdateSoChoTrong(ngaydi, ScheduleId1)) {
                     ModelAndView modelPayment = new ModelAndView("/paymentPage");
 //            session.setAttribute("ticketId", tic.getTicketId());
                     session.setAttribute("email", tic.getEmail());

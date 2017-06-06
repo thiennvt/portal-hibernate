@@ -14,7 +14,7 @@
     <body>
         <div style="margin: 0 auto;">
             <h1 style="text-align: center">Error</h1>
-            <p style="padding-left: 40%"><input class="btn btnUpdate" type="button" name="Back" value="Back" onclick="history.go(-1)" style="margin: 0 auto;"></p>
+            <p style="padding-left: 48%"><input class="btn btnUpdate" type="button" name="Back" value="Back" onclick="history.go(-1)" style="margin: 0 auto;"></p>
         </div>
 
     </body>

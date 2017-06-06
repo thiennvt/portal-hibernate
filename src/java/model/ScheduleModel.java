@@ -72,10 +72,11 @@ public class ScheduleModel extends BaseModel<Schedule> {
 
             Calendar cal = Calendar.getInstance();
             Date date = cal.getTime();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String dateCreate = sdf.format(date);
             s.setDateCreate(dateCreate);
             s.setDateCreateLast(" ");
+            s.setDateStart(instence.getDateStart());
             s.setFlag(true);
             s.setKilometer(instence.getKilometer());
             s.setNote(instence.getNote());
@@ -85,7 +86,6 @@ public class ScheduleModel extends BaseModel<Schedule> {
             s.setStatus(instence.getStatus());
             s.setCompany(instence.getCompany());
             s.setDateStart(instence.getDateStart());
-
             sf.getCurrentSession().save(s);
             sf.getCurrentSession().getTransaction().commit();
 
@@ -117,7 +117,7 @@ public class ScheduleModel extends BaseModel<Schedule> {
             query.setParameter("dateCreate", instence.getDateCreate());
             Calendar cal = Calendar.getInstance();
             Date date = cal.getTime();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String dateLast = sdf.format(date);
             query.setParameter("dateCreateLast", dateLast);
             query.setParameter("flag", true);
@@ -304,7 +304,7 @@ public class ScheduleModel extends BaseModel<Schedule> {
         try {
             int scheduleId = schedule.getScheduleId();
             session = sf.openSession();
-            String hql = "from Car c where c.flag = 1 and c.schedule = " + scheduleId + "";
+            String hql = "from Car c where c.flag = 1 and c.schedule = " + scheduleId + " order by c.carId desc";
             tran = session.beginTransaction();
             listCar = (ArrayList<Car>) session.createQuery(hql).list();
             tran.commit();
@@ -353,29 +353,119 @@ public class ScheduleModel extends BaseModel<Schedule> {
         return null;
     }
 
-    
+    //thêm dữ liệu vào bảng ngày đi
+    public NgayDi addONgayDi(int carId, String ngaydi) {
+        CarModel carModel = new CarModel();
+        Car car = carModel.getObject(carId);
+        boolean check = false;
+        NgayDi n = new NgayDi();
+        try {
+            sf.getCurrentSession().beginTransaction();
+            
+            n.setCar(car);
+            n.setNgayDi(ngaydi);
+            n.setSoGheTrong(car.getNumberOfseat());
+            
+            sf.getCurrentSession().save(n);
+            sf.getCurrentSession().getTransaction().commit();
 
+            check = true;
+        } catch (Exception e) {
+            sf.getCurrentSession().getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return n;
+    }
+    //lấy ra số ghế trống của xe thông qua id car và ngày đi
+    public NgayDi gheTrongNgayDi(int carId,String ngaydi){
+        session = sf.openSession();
+        NgayDi ghetrong = new NgayDi();
+        try {
+//            String hql = "from Schedule s where s.scheduleId=:id and s.flag = 1";
+            String hql = "from NgayDi n where n.car = :carId and n.ngayDi = :ngaydi ";
+            tran = session.beginTransaction();
+            ghetrong = (NgayDi) session.createQuery(hql)
+                    .setInteger("carId", carId)
+                    .setString("ngaydi", ngaydi)
+                    .uniqueResult();
+            tran.commit();
+            return ghetrong;
+        } catch (Exception e) {
+            tran.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
+
+    //update số chỗ trong ngày trong bảng ngày đi
+    public boolean UpdateSoChoTrong(NgayDi instence,String quantity) {
+        session = sf.openSession();
+        boolean check = false;
+        try {
+            String hql = "update NgayDi n "
+                    + "set n.soGheTrong = :soGheTrong "
+                    + "where n.ngaydiId = :id";
+            tran = session.beginTransaction();
+            Query query = session.createQuery(hql);
+            int soghetrong = Integer.parseInt(instence.getSoGheTrong())-Integer.parseInt(quantity);
+            query.setParameter("soGheTrong", String.valueOf(soghetrong));
+            query.setParameter("id", instence.getNgaydiId());
+            int rowCount = query.executeUpdate();
+            tran.commit();
+            check = true;
+        } catch (HibernateException e) {
+            tran.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return check;
+    }
+    //update ghế trống khi khách hàng ấn hủy
+    public boolean UpdateSoChoTrongKhiHuy(NgayDi instence,String quantity) {
+        session = sf.openSession();
+        boolean check = false;
+        try {
+            String hql = "update NgayDi n "
+                    + "set n.soGheTrong = :soGheTrong "
+                    + "where n.ngaydiId = :id";
+            tran = session.beginTransaction();
+            Query query = session.createQuery(hql);
+            int soghetrong = Integer.parseInt(instence.getSoGheTrong())+Integer.parseInt(quantity);
+            query.setParameter("soGheTrong", String.valueOf(soghetrong));
+            query.setParameter("id", instence.getNgaydiId());
+            int rowCount = query.executeUpdate();
+            tran.commit();
+            check = true;
+        } catch (HibernateException e) {
+            tran.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return check;
+    }
     public static void main(String[] args) {
         ScheduleModel model = new ScheduleModel();
-        Schedule sche = new Schedule(1, "Hải Phòng - Yên Bái", " 150km", "01/06/2017", "Yên Bái", "Hải phòng", " dang hoat dong", " dang hoat dong", "01/01/2017", " ", true);
+        Schedule sche = new Schedule(1, "Hải Phòng - Yên Bái", " 150km", "2017-06-01", "Yên Bái", "Hải phòng", " dang hoat dong", " dang hoat dong", "01/01/2017", " ", true);
 //        ArrayList<Car> list = model.getAllCarByScheduleId(sche);
 //        ArrayList<Car> list = model.getAllCarByScheduleId(sche);
 //        ArrayList<String> list = model.getAllNgayDi(sche);
-        ArrayList<String> list = model.getChoTrong(sche);
-        for (String s : list) {
-            System.out.println(s);
+        String ngay = sche.getDateStart();
+        System.out.println(model.gheTrongNgayDi(25, ngay));
+//        ArrayList<String> list = model.getChoTrong(sche);
+//        for (String s : list) {
+//            System.out.println(s);
+//        }
+        NgayDi ngaydi = model.addONgayDi(25, "2017-06-05");
+        if(ngaydi!=null){
+            System.out.println("thanh cong");
         }
-
+        else
+        {
+            System.out.println("that bai");
+        }
     }
-//        Schedule s = model.getObject(1);
-//        System.out.println(s);
-    //Schedule s = new Schedule(1, " phu tho - ha noi", "250", "cam khe", "10h", "my dinh", "12h30", "lich trinh moi", "dang hoat dong", "  ", "  ", true);
-    //boolean check = model.UpdateObject(s); 
-    //if (check) {
-    //  System.out.println("thanh cong");
-    //} else {
-    //   System.out.println("that bai");
-    //}
-
-
 }

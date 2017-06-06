@@ -111,7 +111,9 @@
                                 <label for="">Số chỗ ngồi</label>
                                 <input value="${numaberSeat}" type="text" class="form-control" id="" readonly="true">                          
                                 <label for="">Số chỗ còn</label>
-                                <input value="${numaVailable}" type="text" class="form-control" id="" readonly="true">
+                                <input value="${sessionScope.chocon}" type="text" class="form-control" id="" readonly="true">
+                                <label for="">Ngày đi</label>
+                                <input value="${sessionScope.dateStart}" type="text" class="form-control" id="" readonly="true">
                                 <hr>
                                 <p class="text-center" style="font-size: 25px;color: blue;font-weight: bold">
                                     <label for=""  center;">Thông tin liên hệ</label>
@@ -135,7 +137,9 @@
                                     <s:option value="5" label="5" class="form-control text-center"/>
                                 </s:select>
                                 <label for="">Ngày đi</label>
-                                <s:input path="dateStart" type="date" class="form-control" id="" placeholder=""/>
+                                <s:select path="dateStart" class="form-control text-center">
+                                    <s:option value="${sessionScope.dateStart}" label="${sessionScope.dateStart}" class="form-control text-center"/>
+                                </s:select>
                             </div>
                             <input  type="submit" role="button" style="margin-left:45%;margin-top: 10px" value="Tiếp tục">
                         </s:form>
