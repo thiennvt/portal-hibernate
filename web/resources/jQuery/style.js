@@ -15,3 +15,6 @@ function password()
 
     }
 }
+$(document).ready(function() {
+    $('#mytable').DataTable();
+} );

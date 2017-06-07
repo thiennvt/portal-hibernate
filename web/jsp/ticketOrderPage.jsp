@@ -39,34 +39,28 @@
                         </ol>
                     </section>
                     <section class="content-header">
-                        <a class="btn btn-primary" href="<c:url value="initInsertTicket.htm"/>">Thêm</a>
-                    <form class="navbar-form breadcrumb" role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Search</button>
-                    </form>
-                </section>
-                <section class="content">
-                    <div class="table-responsive text-center">
-                        <table class="table table-bordered table-hover">
-                            <thead>
-                                <tr class="info text-center">
-                                    <td><label>ID </label></td>
-                                    <td><label>Customer Name</label></td>
-                                    <td><label>Address</label></td>
-                                    <td><label>Email</label></td>
-                                    <td><label>Phone</label></td>
-                                    <td><label>Quantity Ticket</label></td>
-                                    <td><label>Date Start</label></td>
-                                    <td><label>Total Price(000 VND)</label></td>
-                                    <td><label>Date Order</label></td>
-                                    <td><label>Status</label></td>
-                                    <td><label>Car order</label></td>
-                                    <td colspan="2">Action</td>
-                                </tr>
-                            </thead>  
-                            <tbody>
+                    </section>
+                    <section class="content">
+                        <div class="table-responsive text-center">
+                            <table class="table table-bordered table-hover" id="mytable" class="display">
+                                <thead>
+                                    <tr class="info text-center">
+                                        <td><label>ID </label></td>
+                                        <td><label>Customer Name</label></td>
+                                        <td><label>Address</label></td>
+                                        <td><label>Email</label></td>
+                                        <td><label>Phone</label></td>
+                                        <td><label>Quantity Ticket</label></td>
+                                        <td><label>Date Start</label></td>
+                                        <td><label>Total Price(000 VND)</label></td>
+                                        <td><label>Date Order</label></td>
+                                        <td><label>Status</label></td>
+                                        <td><label>Car order</label></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </thead>  
+                                <tbody>
                                 <c:forEach var="ticket" items="${listTicket}">
                                     <tr class="warning">
                                         <td>${ticket.ticketId}</td>
@@ -102,6 +96,8 @@
         <!-- Bootstrap 3.3.6 -->
         <script type="text/javascript" src="<c:url value='/resources/bootstrap/js/bootstrap.min.js' />"></script>
         <script type="text/javascript" src="<c:url value='/resources/jQuery/app.min.js' />"></script>
+        <script type="text/javascript" src="<c:url value='/resources/jQuery/jquery.dataTables.min.js' />"></script>
+
     </body>
 </html>
 

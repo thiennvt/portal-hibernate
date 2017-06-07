@@ -55,6 +55,7 @@
         <!-- Bootstrap 3.3.6 -->
         <script type="text/javascript" src="<c:url value='/resources/bootstrap/js/bootstrap.min.js' />"></script>
         <script type="text/javascript" src="<c:url value='/resources/jQuery/app.min.js' />"></script>
+        <script type="text/javascript" src="<c:url value='/resources/jQuery/jquery.dataTables.min.js' />"></script>
     </body>
 </html>
 
