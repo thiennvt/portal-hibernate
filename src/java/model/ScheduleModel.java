@@ -76,7 +76,7 @@ public class ScheduleModel extends BaseModel<Schedule> {
             String dateCreate = sdf.format(date);
             s.setDateCreate(dateCreate);
             s.setDateCreateLast(" ");
-            s.setDateStart(instence.getDateStart());
+            s.setDateStart("   ");
             s.setFlag(true);
             s.setKilometer(instence.getKilometer());
             s.setNote(instence.getNote());
@@ -103,13 +103,12 @@ public class ScheduleModel extends BaseModel<Schedule> {
         boolean check = false;
         try {
             String hql = "update Schedule s "
-                    + "set s.route = :route,s.kilometer = :kilometer,s.dateStart = :dateStart, s.placeStart = :placeStart, s.placeCome = :placeCome,s.note = :note,s.status = :status,s.dateCreate = :dateCreate,s.dateCreateLast = :dateCreateLast,s.flag = :flag "
+                    + "set s.route = :route,s.kilometer = :kilometer, s.placeStart = :placeStart, s.placeCome = :placeCome,s.note = :note,s.status = :status,s.dateCreate = :dateCreate,s.dateCreateLast = :dateCreateLast,s.flag = :flag "
                     + "where s.scheduleId = :id";
             tran = session.beginTransaction();
             Query query = session.createQuery(hql);
             query.setParameter("route", instence.getRoute());
             query.setParameter("kilometer", instence.getKilometer());
-            query.setParameter("dateStart", instence.getDateStart());
             query.setParameter("placeStart", instence.getPlaceStart());
             query.setParameter("placeCome", instence.getPlaceCome());
             query.setParameter("note", instence.getNote());

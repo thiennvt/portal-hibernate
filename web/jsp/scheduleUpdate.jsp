@@ -59,10 +59,6 @@
                                     <td><s:input path="kilometer" class="form-control text-center"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Date Start</th>
-                                    <td><s:input path="dateStart" class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
                                     <th>Place start</th>
                                     <td><s:input path="placeStart" class="form-control text-center"/></td>
                                 </tr>

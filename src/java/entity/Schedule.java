@@ -23,13 +23,13 @@ public class Schedule{
     public static final int SCHEDULEID = 0;
     public static final String ROUTE = "";
     public static final String KILOMETTER = " ";
-    public static final String DATESTART = "";
-    public static final String PLACESTART = "";
-    public static final String PLACECOME = "";
-    public static final String NOTE = "";
-    public static final String STATUS = "";
-    public static final String DATECREATE = "";
-    public static final String DATELAST = "";
+    public static final String DATESTART = " ";
+    public static final String PLACESTART = " ";
+    public static final String PLACECOME = " ";
+    public static final String NOTE = " ";
+    public static final String STATUS = " ";
+    public static final String DATECREATE = " ";
+    public static final String DATELAST = " ";
     public static final boolean  FLAG =  false;
     @Id
     @Column(name = "scheduleId")
