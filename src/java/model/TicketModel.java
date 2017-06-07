@@ -220,6 +220,49 @@ public class TicketModel extends BaseModel<Ticket> {
         return null;
     }
 
+    public Ticket addOTicket(Ticket instence) {
+        Ticket tic = new Ticket();
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            Calendar cal = Calendar.getInstance();
+            Date date = cal.getTime();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String dateCreate = sdf.format(date);
+            tic.setAddress(instence.getAddress());
+            tic.setCar(instence.getCar());
+            tic.setCompany(instence.getCompany());
+            tic.setCustomerName(instence.getCustomerName());
+            tic.setDateLast(" ");
+            tic.setDateOrder(dateCreate);
+            tic.setDateStart(instence.getDateStart());
+            tic.setEmail(instence.getEmail());
+            tic.setFlag(true);
+            tic.setNote(instence.getNote());
+            tic.setNumberOfSeat(instence.getNumberOfSeat());
+            tic.setPhone(instence.getPhone());
+            int priceCar = Integer.parseInt(instence.getPrice());
+            int quantity = Integer.parseInt(instence.getQuanTicket());
+            int sumMony = priceCar*quantity;
+            tic.setPrice(String.valueOf(sumMony));
+            tic.setPriceCancel("0");
+            tic.setQuanTicket(instence.getQuanTicket());
+            tic.setReasonCancel(" ");
+            tic.setStatus("chờ thanh toán");
+            tic.setTicketType(instence.getTicketType());
+
+            session.save(tic);
+            session.getTransaction().commit();
+            return tic;
+        } catch (Exception e) {
+//            sf.getCurrentSession().getTransaction().rollback();
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
     public static void main(String[] args) {
         TicketModel model = new TicketModel();
 

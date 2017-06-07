@@ -264,7 +264,7 @@ public class ScheduleController {
             model.getModelMap().put("ticket", ticket);
             NgayDi sogheTrong = scheMdel.gheTrongNgayDi(carId, session.getAttribute("dateStart").toString());
             if (sogheTrong == null) {
-                NgayDi objNgay = scheMdel.addONgayDi(car.getCarId(),session.getAttribute("dateStart").toString());
+                NgayDi objNgay = scheMdel.addONgayDi(car.getCarId(), session.getAttribute("dateStart").toString());
                 if (objNgay != null) {
                     String numGhe = objNgay.getSoGheTrong();
                     session.setAttribute("chocon", numGhe);
@@ -286,8 +286,8 @@ public class ScheduleController {
     public ModelAndView handleOrderTicket(@ModelAttribute("ticket") Ticket tic, HttpSession session) {
         try {
             TicketModel ticketModel = new TicketModel();
-            boolean check = ticketModel.addObject(tic);
-            if (check) {
+            Ticket check = ticketModel.addOTicket(tic);
+            if (check != null) {
                 //lấy mã xe 
                 String carId = session.getAttribute("carId1").toString();
                 String soluongve = tic.getQuanTicket();
@@ -297,7 +297,9 @@ public class ScheduleController {
                 //cập nhật số chỗ khi khách hàng điền thông tin đặt vé
                 if (scheMdel.UpdateSoChoTrong(ngaydi, soluongve)) {
                     ModelAndView modelPayment = new ModelAndView("/paymentPage");
-//            session.setAttribute("ticketId", tic.getTicketId());
+                    Ticket ticket = ticketModel.getObject(check.getTicketId());
+                    session.setAttribute("ticketOrderId", ticket.getTicketId());
+                    modelPayment.addObject("ticket", ticket);
                     session.setAttribute("email", tic.getEmail());
                     session.setAttribute("phone", tic.getPhone());
                     return modelPayment;
@@ -317,24 +319,21 @@ public class ScheduleController {
 
     //xử lí thanh toán
     @RequestMapping(value = "/handlePaymentOrder")
-    public ModelAndView handlePaymentOrder(HttpSession session) throws MessagingException, IOException {
+    public ModelAndView handlePaymentOrder(@RequestParam("ticketId") int ticketId, HttpSession session) throws MessagingException, IOException {
         try {
             ModelAndView model = new ModelAndView("/paymentSucsess");
-
-//        String ticketId = (String) session.getAttribute("ticketId");
             String email = (String) session.getAttribute("email");
             String phone = (String) session.getAttribute("phone");
-//        TicketModel ticketModel = new TicketModel();
-//        Ticket ticket = ticketModel.getObject(Integer.parseInt(ticketId));
+            TicketModel ticketModel = new TicketModel();
+            Ticket ticket = ticketModel.getObject(ticketId);
 
-//        String schedule = ticket.getCar().getSchedule().getRoute();
-//        String company = ticket.getCar().getCom().getName();
-//        String car = ticket.getCar().getNumberCar();
-//        String timeStart = ticket.getCar().getTimeStart();
-//        String numberSeat = ticket.getNumberOfSeat();
-//        String message = "Dat ve thanh cong:  "+schedule+". "+company+". "+ "Bien so: "+car+"So cho ngoi: "+numberSeat+" thoi gian khoi hanh: "+timeStart;
-            EmailUtil.sendEmal(email, "Thu cam on", "Quy khahch da dat ve thanh cong");
-            SMSUtil.sendSMS(phone, "Quy khach da dat ve thanh cong");
+            String schedule = ticket.getCar().getSchedule().getRoute();
+            String company = ticket.getCar().getCom().getName();
+            String car = ticket.getCar().getNumberCar();
+            String timeStart = ticket.getCar().getTimeStart();
+            String message = "Dat ve thanh cong:  " + schedule + ". " + company + ". " + "Bien so xe: " + car +" "+  " thoi gian khoi hanh: " + timeStart;
+            EmailUtil.sendEmal(email, "Thu cam on", message);
+            SMSUtil.sendSMS(phone, message);
             return model;
         } catch (Exception e) {
             e.printStackTrace();

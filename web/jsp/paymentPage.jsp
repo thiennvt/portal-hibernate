@@ -57,6 +57,37 @@
             </div>
         </nav>
         <div class="container">
+            <s:form action="handleOrderTicket.htm" commandName="ticket" method="GET">
+                <div class="row">
+                    <div style="margin-top: 80px;" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-md-push-2 col-lg-push-2">
+                        <table class="table text-center">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" style="font-weight: bold;color: red;">THÔNG TIN VÉ ĐẶT</td>
+                                </tr>
+                                <tr>
+                                    <td class="format_td">Họ tên</td>
+                                    <td><s:input path="customerName" readonly="true" class="format_input"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="format_td">Ngày đi</td>
+                                    <td><s:input path="dateStart" readonly="true" class="format_input"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="format_td">Số lượng vé</td>
+                                    <td><s:input path="quanTicket" readonly="true" class="format_input"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="format_td">Tổng tiền</td>
+                                    <td><s:input path="price" readonly="true" class="format_input"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </s:form>
+        </div>
+        <div class="container">
             <div class="row">
                 <legend class="text-center">Hình thức thanh toán</legend><br>
                 <div class="form-group col-sm-6 col-xs-12">
@@ -100,7 +131,7 @@
                     </select>
 
                 </div>
-                <a href="<c:url value="/schedule/handlePaymentOrder.htm"/>" class="btn btn-primary pull-right">Thanh toán</a>
+                <a href="<c:url value="/schedule/handlePaymentOrder.htm?ticketId=${sessionScope.ticketOrderId}"/>" class="btn btn-primary pull-right">Thanh toán</a>
             </div>
         </div>
     </body>
