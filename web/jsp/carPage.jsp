@@ -39,16 +39,10 @@
                         </section>
                         <section class="content-header">
                             <a class="btn btn-primary" href="<c:url value="initInsertCar.htm?companyId=${sessionScope.id}"/>">Thêm</a>
-                        <form  class="navbar-form breadcrumb" role="search">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Search"/>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Search</button>
-                        </form>
                     </section>
                     <section class="content">
                         <div class="table-responsive text-center">
-                            <table class="table table-bordered table-hover">
+                            <table class="table table-bordered table-hover" id="mytable" class="display">
                                 <thead>
                                     <tr class="back_color text-center">
                                         <td><label>ID </label></td>
@@ -59,7 +53,9 @@
                                         <td><label>Time Start</label></td>
                                         <td><label>Time Come</label></td>
                                         <td><label>Status</label></td>
-                                        <td colspan="3">Action</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                 </thead>  
                                 <tbody>
