@@ -49,7 +49,7 @@
                 </section>
                 <section class="content">
                     <div class="table-responsive text-center">
-                        <table class="table table-bordered table-hover">
+                        <table class="table table-bordered table-hover" id="mytable" class="display">
                             <thead>
                                 <tr class="info text-center">
                                     <td><label>ID </label></td>
@@ -62,7 +62,7 @@
                                     <td><label>Reson Cancel</label></td>
                                     <td><label>Price Cancel</label></td>
                                     <td><label>Car order</label></td>
-                                    <td colspan="2">Action</td>
+                                    <td></td>
                                 </tr>
                             </thead>  
                             <tbody>
@@ -78,7 +78,6 @@
                                         <td>${ticket.reasonCancel}</td>
                                         <td>${ticket.priceCancel}</td>
                                         <td><a class="update" style="color: blue" href="<c:url value="/car/initCarDetail.htm?carId=${ticket.car}" />" style="color: blue;">${ticket.car}</a></td>
-<!--                                        <td><a class="update" style="color: blue" href="\<c:url value="initUpdateTicket.htm?ticketId=\${ticket.ticketId}" />">Update</a></td>-->
                                         <td><a onclick="confirmDelete()" style="color: red" class="update" style="color: red" href="<c:url value="initDeleteTicket.htm?ticketId=${ticket.ticketId}" />">Delete</a></td>
                                     </tr> 
                                 </c:forEach>
@@ -100,5 +99,7 @@
         <!-- Bootstrap 3.3.6 -->
         <script type="text/javascript" src="<c:url value='/resources/bootstrap/js/bootstrap.min.js' />"></script>
         <script type="text/javascript" src="<c:url value='/resources/jQuery/app.min.js' />"></script>
+        <script type="text/javascript" src="<c:url value='/resources/jQuery/jquery.dataTables.min.js' />"></script>
+
     </body>
 </html>
