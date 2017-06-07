@@ -334,6 +334,7 @@ public class ScheduleController {
             String message = "Dat ve thanh cong:  " + schedule + ". " + company + ". " + "Bien so xe: " + car +" "+  " thoi gian khoi hanh: " + timeStart;
             EmailUtil.sendEmal(email, "Thu cam on", message);
             SMSUtil.sendSMS(phone, message);
+            ticketModel.updateStatus(ticketId);
             return model;
         } catch (Exception e) {
             e.printStackTrace();

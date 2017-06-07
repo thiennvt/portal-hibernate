@@ -91,7 +91,7 @@ public class TicketModel extends BaseModel<Ticket> {
             tic.setPhone(instence.getPhone());
             int priceCar = Integer.parseInt(instence.getPrice());
             int quantity = Integer.parseInt(instence.getQuanTicket());
-            int sumMony = priceCar*quantity;
+            int sumMony = priceCar * quantity;
             tic.setPrice(String.valueOf(sumMony));
             tic.setPriceCancel("0");
             tic.setQuanTicket(instence.getQuanTicket());
@@ -163,7 +163,7 @@ public class TicketModel extends BaseModel<Ticket> {
             String hql = "update Ticket t set t.reasonCancel=:reasonCancel,t.priceCancel=:priceCancel, t.flag = 0 where t.ticketId = :id ";
             tran = session.beginTransaction();
             Query query = session.createQuery(hql);
-            Double priceCancel = Float.parseFloat(instence.getPrice())*0.03;
+            Double priceCancel = Float.parseFloat(instence.getPrice()) * 0.03;
             query.setParameter("reasonCancel", "vợ đẻ");
             query.setParameter("priceCancel", String.valueOf(priceCancel));
             query.setParameter("id", instence.getTicketId());
@@ -243,7 +243,7 @@ public class TicketModel extends BaseModel<Ticket> {
             tic.setPhone(instence.getPhone());
             int priceCar = Integer.parseInt(instence.getPrice());
             int quantity = Integer.parseInt(instence.getQuanTicket());
-            int sumMony = priceCar*quantity;
+            int sumMony = priceCar * quantity;
             tic.setPrice(String.valueOf(sumMony));
             tic.setPriceCancel("0");
             tic.setQuanTicket(instence.getQuanTicket());
@@ -263,6 +263,29 @@ public class TicketModel extends BaseModel<Ticket> {
         }
         return null;
     }
+
+    //update date trạng thani
+    public void updateStatus(int id) {
+        session = sf.openSession();
+        try {
+            tran = session.beginTransaction();
+            String hql = "update Ticket t "
+                    + "set t.status = :status "
+                    + "where t.ticketId = :id ";
+            Query query = session.createQuery(hql);
+
+            query.setParameter("status", "Đã thanh toán");
+            query.setParameter("id", id);
+            int rowCount = query.executeUpdate();
+            tran.commit();
+        } catch (HibernateException e) {
+            tran.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
     public static void main(String[] args) {
         TicketModel model = new TicketModel();
 
@@ -273,7 +296,7 @@ public class TicketModel extends BaseModel<Ticket> {
         Car car = new Car(1);
         Company com = new Company(1);
         //Ticket tic = new Ticket("thuong", "nguyen duong vat", "hai phong", "hoangoc@gmail.com", "phone", 1, "15", "01/02/2017", 100, " ", " ", "xe sang", "da thanh toan", " ", 0, true, 1, 1);
-        Ticket t = new Ticket(3,"2", "Minh móc", "Hai Phong", "123@abc", "123123", "1", "100", "1/1/2017", "100", " ", " ", "Test", "Test", "Test", "0", true, car, com);
+        Ticket t = new Ticket(3, "2", "Minh móc", "Hai Phong", "123@abc", "123123", "1", "100", "1/1/2017", "100", " ", " ", "Test", "Test", "Test", "0", true, car, com);
         if (model.addObject(t)) {
             System.out.println("thanh cong");
         } else {

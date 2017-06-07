@@ -34,7 +34,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<c:url value="/schedule/showHomePageClient.htm"/>"/>"><img src="<c:url value="/resources/img/1.png"/>"></a>
+                    <a class="navbar-brand" href="<c:url value="/schedule/showHomePageClient.htm"/>"/><img src="<c:url value="/resources/img/1.png"/>"></a>
                 </div>
 
 
