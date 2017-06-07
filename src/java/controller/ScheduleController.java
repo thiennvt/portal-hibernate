@@ -331,7 +331,9 @@ public class ScheduleController {
             String company = ticket.getCar().getCom().getName();
             String car = ticket.getCar().getNumberCar();
             String timeStart = ticket.getCar().getTimeStart();
-            String message = "Dat ve thanh cong:  " + schedule + ". " + company + ". " + "Bien so xe: " + car +" "+  " thoi gian khoi hanh: " + timeStart;
+            String placeStart = ticket.getCar().getSchedule().getPlaceStart();
+            String ngaydi = ticket.getDateStart();
+            String message = "Dat ve thanh cong:  " + schedule + ". " + company + ". " + "Bien so xe: " + car + ". Ngay khoi hanh: "+ngaydi+ ".  Noi khoi hanh: "+placeStart +   ". Thoi gian khoi hanh: " + timeStart;
             EmailUtil.sendEmal(email, "Thu cam on", message);
             SMSUtil.sendSMS(phone, message);
             ticketModel.updateStatus(ticketId);
