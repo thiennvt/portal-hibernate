@@ -59,7 +59,7 @@
                                     <td><label>Phone</label></td>
                                     <td><label>Quantity Ticket</label></td>
                                     <td><label>Date Start</label></td>
-                                    <td><label>Price</label></td>
+                                    <td><label>Total Price(000 VND)</label></td>
                                     <td><label>Date Order</label></td>
                                     <td><label>Status</label></td>
                                     <td><label>Car order</label></td>
@@ -76,7 +76,7 @@
                                         <td>${ticket.phone}</td>
                                         <td>${ticket.quanTicket}</td>
                                         <td>${ticket.dateStart}</td>
-                                        <td>${ticket.price}000(VND)</td>
+                                        <td>${ticket.price}</td>
                                         <td>${ticket.dateOrder}</td>
                                         <td>${ticket.status}</td>
                                         <td><a class="update" style="color: blue" href="<c:url value="/car/initCarDetail.htm?carId=${ticket.car}" />" style="color: blue;">${ticket.car}</a></td>
