@@ -28,7 +28,7 @@
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>TRAI</b>ĐẸP</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>NHÓM 5 </b>TRAI ĐẸP</span>
+                <span class="logo-lg"><b>ĐẶT VÉ XE</b></span>
             </a>
 
             <!-- Header Navbar -->
@@ -84,7 +84,9 @@
                 <ul class="sidebar-menu">
                     <li class="header">MENU CHÍNH</li>
                     <!-- Optionally, you can add icons to the links -->
+                    <li class="active"><a href="#"><i class="fa fa-bus"></i> <span>Quản lí nhân viên</span></a></li>
                     <li class="active"><a href="<c:url value="/car/getAllCar.htm?companyId=${sessionScope.id}"/>"><i class="fa fa-bus"></i> <span>Quản lí xe khách</span></a></li>
+                    <li class="active"><a href="#"><i class="fa fa-bus"></i> <span>Quản lí Tuyến</span></a></li>
                     <li><a href="<c:url value="/schedule/getAllSchedule.htm?companyId=${sessionScope.id}"/> "><i class="fa fa-map-marker"></i> <span>Quản lí lịch trình</span></a></li>
                     <li class="treeview">
                         <a href="#"><i class="fa fa-ticket"></i> <span>Quản lí vé xe</span>
@@ -97,6 +99,7 @@
                             <li><a href="<c:url value="/ticket/getAllTicketCancel.htm?companyId=${sessionScope.id}"/>"><i class="fa fa-chevron-circle-right"></i> Vé hủy</a></li>
                         </ul>
                     </li>
+                    <li><a href="<c:url value="/company/ThongKeNhaXeClient.htm?companyId=${sessionScope.id}"/> "><i class="fa fa-map-marker"></i> <span>Quản lí thống kê</span></a></li>
                 </ul>
                 <!-- /.sidebar-menu -->
             </section>

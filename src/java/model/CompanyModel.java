@@ -6,10 +6,14 @@
 package model;
 
 import entity.Company;
+import form.entity.ThongKe;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -90,14 +94,14 @@ public class CompanyModel extends BaseModel<Company> {
             com.setPassword(instence.getPassword());
             com.setPhone(instence.getPhone());
             com.setStatus(false);
-            
+
             session.save(com);
             session.getTransaction().commit();
             check = true;
         } catch (Exception e) {
             session.getTransaction().rollback();
             e.printStackTrace();
-        } finally{
+        } finally {
             session.close();
         }
         return check;
@@ -140,6 +144,7 @@ public class CompanyModel extends BaseModel<Company> {
         }
         return false;
     }
+
     public boolean UpdateCompanyDetail(Company instence) {
         session = sf.openSession();
         try {
@@ -176,6 +181,7 @@ public class CompanyModel extends BaseModel<Company> {
         }
         return false;
     }
+
     //delete company
     @Override
     public boolean DeleteObject(Company instence) {
@@ -197,13 +203,14 @@ public class CompanyModel extends BaseModel<Company> {
         }
         return false;
     }
-    public Company checkLoginCompany(Company com){
+
+    public Company checkLoginCompany(Company com) {
         Company comp = new Company();
         session = sf.openSession();
         try {
             String hql = "from Company c where c.accountName = :username and c.password = :pass and c.flag = 1 ";
             tran = session.beginTransaction();
-            comp =  (Company) session.createQuery(hql)
+            comp = (Company) session.createQuery(hql)
                     .setParameter("username", com.getAccountName())
                     .setParameter("pass", com.getPassword()).uniqueResult();
             return comp;
@@ -215,6 +222,7 @@ public class CompanyModel extends BaseModel<Company> {
             session.close();
         }
     }
+
     public boolean waiteConfirm() {
         session = sf.openSession();
         ArrayList<Company> listCom = null;
@@ -255,8 +263,9 @@ public class CompanyModel extends BaseModel<Company> {
         }
         return false;
     }
+
     //search schedule
-    public ArrayList<Company> search(Company  com) {
+    public ArrayList<Company> search(Company com) {
         session = sf.openSession();
         ArrayList<Company> listCom;
         try {
@@ -275,10 +284,94 @@ public class CompanyModel extends BaseModel<Company> {
         }
         return null;
     }
+
+    public ArrayList<ThongKe> thongKeVeXe() {
+        session = sf.openSession();
+        ArrayList<Object[]> listCom = null;
+        ArrayList<ThongKe> listThongKe = new ArrayList<>();
+        ArrayList<Object> listTongtien = new ArrayList<>();
+
+        try {
+            String hql = "select com.companyId, com.name, count(tic.company.companyId) as num,sum(tic.car.priceTicket*tic.quanTicket) from Company as com left join com.tickets as tic where com.flag = '1'  group by com.companyId order by num desc ";
+            tran = session.beginTransaction();
+            Query query = session.createQuery(hql);
+            listCom = (ArrayList<Object[]>) query.list();
+            tran.commit();
+        } catch (Exception e) {
+            tran.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        if (listCom != null) {
+            for (Object[] object : listCom) {
+                ThongKe tk = new ThongKe();
+                tk.setId((Integer) object[0]);
+                tk.setName((String) object[1]);
+                tk.setCount((Long) object[2]);
+                tk.setTotalPrice(Double.parseDouble((String) object[3]));
+                listThongKe.add(tk);
+            }
+        }
+        return listThongKe;
+    }
+
+//    public List<Object> getListCarByCompany(int companyId) {
+//        session = sf.openSession();
+//        ArrayList<Object> listID = null;
+//
+//        try {
+//            String hql = "select c.carId from Car c left join c.tickets as tic\n"
+//                    + "where c.com.companyId = '" + companyId + "' and c.flag = '1' ";
+//            tran = session.beginTransaction();
+//            Query query = session.createQuery(hql);
+//            listID = (ArrayList<Object>) query.list();
+//            tran.commit();
+//        } catch (Exception e) {
+//            tran.rollback();
+//            e.printStackTrace();
+//        } finally {
+//            session.close();
+//        }
+//        return listID;
+//    }
+
     
+    public ArrayList<ThongKe> thongKeVeXe(int companyId) {
+        session = sf.openSession();
+        ArrayList<Object[]> listCom = null;
+        ArrayList<ThongKe> listThongKe = new ArrayList<>();
+
+        try {
+            String hql = "select c.carId,c.numberCar,count(t.car.carId) as slve from Car c left join c.tickets t where c.com.companyId = '"+ companyId
+                    +"' and c.flag = '1' group by c.carId order by slve desc ";
+            tran = session.beginTransaction();
+            Query query = session.createQuery(hql);
+            listCom = (ArrayList<Object[]>) query.list();
+            tran.commit();
+        } catch (Exception e) {
+            tran.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        if (listCom != null) {
+            for (Object[] object : listCom) {
+                ThongKe tk = new ThongKe();
+                tk.setId((Integer) object[0]);
+                tk.setName((String) object[1]);
+                tk.setCount((Long) object[2]);
+                listThongKe.add(tk);
+            }
+        }
+        return listThongKe;
+    }
+
     public static void main(String[] args) {
         CompanyModel model = new CompanyModel();
-        Company u1 = new Company(13, "a", "0"," ", "0", "0", "0", "0", "0", "0", "0", true, true);
+//        Company u1 = new Company(13, "a", "0", " ", "0", "0", "0", "0", "0", "0", "0", true, true);
 //        boolean  check = model.UpdateObject(u1);
 //        if (check) {
 //            System.out.println("thanh cong");
@@ -286,8 +379,9 @@ public class CompanyModel extends BaseModel<Company> {
 //            System.out.println("that bai");
 //        }
 
-        ArrayList<Company> listUser = model.getAllObject();
-        for (Company u : listUser) {
+//        ArrayList<Object> listUser = (ArrayList<Object>) model.getListCarByCompany(2);
+        ArrayList<ThongKe> listUser = model.thongKeVeXe(7);
+        for (ThongKe u : listUser) {
             System.out.println(u.toString());
         }
 //        User u = model.getObject(1);

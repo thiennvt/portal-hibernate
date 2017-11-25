@@ -5,8 +5,8 @@
  */
 package util;
 
-import java.net.Authenticator;
-import java.net.PasswordAuthentication;
+import javax.mail.Authenticator;
+import javax.mail.PasswordAuthentication;
 import java.util.Date;
 import java.util.Properties;
 import javax.mail.Message;
@@ -16,7 +16,6 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
 
 /**
  *
@@ -39,23 +38,23 @@ public class EmailUtil {
         pro.put("mail.password", password);
 
         // Tao 1 session de xac thuc mail gui
-        javax.mail.Authenticator auth = new javax.mail.Authenticator() {
+        Authenticator auth = new Authenticator() {
             @Override
-            public javax.mail.PasswordAuthentication getPasswordAuthentication() {
-                return new javax.mail.PasswordAuthentication(userName, password);
+            public PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(userName, password);
             }
         };
-        Session session = Session.getInstance(pro,auth);
-        
+        Session session = Session.getInstance(pro, auth);
+
         //tạo một mail mới
         MimeMessage msg = new MimeMessage(session);
         msg.setHeader("Content-Type", "text/plain; charset=UTF-8");
         msg.setFrom(new InternetAddress(userName));
         InternetAddress[] toAddress = {new InternetAddress(recipient)};
         msg.setRecipients(Message.RecipientType.TO, toAddress);
-        msg.setSubject(subject,"utf-8");
+        msg.setSubject(subject, "utf-8");
         msg.setSentDate(new Date());
-        msg.setContent(message,"text/html; charset=utf-8");
+        msg.setContent(message, "text/html; charset=utf-8");
         //sent email
         Transport.send(msg);
     }

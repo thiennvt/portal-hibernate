@@ -42,46 +42,28 @@
                     <section class="content">
                         <div class="table-responsive text-center">
                         <s:form action="handleUpdateCar.htm" commandName="carUpdate" method="GET">
-                            <table class="table text-center"b style="background: skyblue;">
+                            <table class="table no-border"style="background: wheat;border:none">
                                 <tr style="background: #0091d9">
-                                    <td colspan="2" class="thongtin"><h4><b>ĐIỀN THÔNG TIN XE KHÁCH MỚI</b></h4></td>
+                                    <td colspan="4" class="thongtin"><h4><b>ĐIỀN THÔNG TIN XE KHÁCH MỚI</b></h4></td>
                                 </tr>
                                 <tr>
-                                    <th>ID</th>
-                                    <td><s:input path="carId" readonly="true"  class="form-control text-center"/></td>
+                                    <th style="text-align: right">ID</th>
+                                    <td><s:input path="carId" readonly="true"/></td>
+                                    <th style="text-align: right">Time Start</th>
+                                    <td><s:input path="timeStart"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Car Type</th>
-                                    <td><s:input path="carType"  class="form-control text-center"/></td>
+                                    <th style="text-align: right">Car Type</th>
+                                    <td><s:input path="carType"/></td>
+                                    <th style="text-align: right">Time Come</th>
+                                    <td><s:input path="timeCome"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Number Car</th>
-                                    <td><s:input path="numberCar"  class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Color</th>
-                                    <td><s:input path="color"  class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Number of Seat</th>
-                                    <td><s:input path="numberOfseat"  class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Lable</th>
-                                    <td><s:input path="company"  class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Time Start</th>
-                                    <td><s:input path="timeStart"  class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Time Come</th>
-                                    <td><s:input path="timeCome"  class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Schedule</th>
+                                    <th style="text-align: right">Number Car</th>
+                                    <td><s:input path="numberCar"/></td>
+                                    <th style="text-align: right">Schedule</th>
                                     <td>
-                                        <s:select path="schedule.scheduleId" class="form-control text-center">
+                                        <s:select path="schedule.scheduleId">
                                             <c:forEach var="schedule" items="${listSchedule}">
                                                 <s:option value="${schedule.scheduleId}" label="${schedule.route}" class="form-control text-center"/>
                                             </c:forEach>
@@ -89,23 +71,29 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Price</th>
-                                    <td><s:input path="priceTicket"  class="form-control text-center"/></td>
+                                    <th style="text-align: right">Color</th>
+                                    <td><s:input path="color"/></td>
+                                    <th style="text-align: right">Price</th>
+                                    <td><s:input path="priceTicket"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Date Create</th>
-                                    <td><s:input path="dateCreate"  class="form-control text-center"/></td>
+                                    <th style="text-align: right">Number of Seat</th>
+                                    <td><s:input path="numberOfseat"/></td>
+                                    <th style="text-align: right">Date Create</th>
+                                    <td><s:input path="dateCreate"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Status</th>
-                                    <td><s:input path="status"  class="form-control text-center"/></td>
+                                    <th style="text-align: right">Lable</th>
+                                    <td><s:input path="company"/></td>
+                                    <th style="text-align: right">Status</th>
+                                    <td><s:input path="status"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Note</th>
-                                    <td><s:textarea rows="3" path="note"  class="form-control text-center"/></td>
+                                    <th style="text-align: right">Note</th>
+                                    <td><s:textarea rows="3" path="note"/></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2"><input class="btn btnUpdate btn-primary" type="submit" value="Submit"></td>
+                                    <td colspan="4"><input class="btn btnUpdate btn-primary" type="submit" value="Submit"></td>
                                 </tr>
                             </table>
                         </s:form>

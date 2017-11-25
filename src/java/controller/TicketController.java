@@ -135,6 +135,37 @@ public class TicketController {
 
     }
 
+    @RequestMapping(value = "/showSearchTicket")
+    public ModelAndView showSearchTicket(){
+        try {
+            ModelAndView model = new ModelAndView("/ticketSearch");
+            Ticket tic = new Ticket();
+            model.getModelMap().put("ticketSearch", tic);
+            return model;
+        } catch (Exception e) {
+            e.printStackTrace();
+            ModelAndView model1 = new ModelAndView("errorPage");
+            return model1;
+        }
+    }
+    @RequestMapping(value = "/handleSearchTicketClient")
+    public ModelAndView handlSearchTicketClient(@ModelAttribute("ticketSearch") Ticket ticket){
+        Ticket tic = ticModel.getObject(ticket.getTicketId());
+        try {
+            if (tic != null) {
+                    ModelAndView model = new ModelAndView("/ticketSearch");
+                    model.addObject("ticket", tic);
+                    return model;
+            } else {
+                ModelAndView model1 = new ModelAndView("errorPage");
+                return model1;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ModelAndView model1 = new ModelAndView("errorPage");
+            return model1;
+        }
+    }
     //delete schedule admin
     @RequestMapping(value = "/initDeleteTicket")
     public ModelAndView initAdminDeleteSchedule(@ModelAttribute("schedule") Ticket ticket, @RequestParam("companyId") int companyId) {

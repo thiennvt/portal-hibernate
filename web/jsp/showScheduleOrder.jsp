@@ -42,6 +42,7 @@
 
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav navbar-right">
+                        <li><a href="<c:url value="/ticket/showSearchTicket.htm"/>">Đăng kí</a></li>
                         <li><a href="<c:url value="/company/loginPageCompany.htm"/>">Đăng nhập</a></li>
                         <li><a href="<c:url value="/company/initInsertCompany.htm"/>">Đăng kí</a></li>
                     </ul>
@@ -68,55 +69,68 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="row">
-                <!-- cái này theo t ko cần đầu vì nó hơi vướng tầm nhìn nhưng tùy m nếu vẫn nuốn thì cho xuống cuối ý ưu tiên danh sách lịch trình -->
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-                </div>
-            </div>
-
-        </div>
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <table class="table table-hover">
-                        <thead style="background-color: #cfc">
-                            <tr>
-                                <td colspan="10" style="background: moccasin;font-weight: bold;text-align: center;">DANH SÁCH XE XE CHẠY THEO TUYẾN: <b style="color: blue">${sessionScope.diemdau} - ${sessionScope.diemcuoi}</b></td>
-                            </tr>
-                            <tr>
-                                <th>ID</th>
-                                <th>Hãng xe</th>
-                                <th>Loại xe</th>
-                                <th>Biển số</th>
-                                <th>Số chỗ ngồi</th>
-                                <th>Số chỗ trống</th>
-                                <th>Giá vé</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%
-                                ArrayList<String> listGheTrong = (ArrayList<String>) request.getAttribute("listChotrong");
-                                ArrayList<Car> listCar = (ArrayList<Car>) request.getAttribute("listCar");
-                                for (int i = 0; i < listCar.size(); i++) {
-                                    out.print("<tr class=\"scheduleInfo\">");
-                                    out.print("<td>" + listCar.get(i).getCarId() + "</td>");
-                                    out.print("<td>" + listCar.get(i).getCom().getName() + "</td>");
-                                    out.print("<td>" + listCar.get(i).getCarType() + "</td>");
-                                    out.print("<td>" + listCar.get(i).getNumberCar() + "</td>");
-                                    out.print("<td>" + listCar.get(i).getNumberOfseat() + "</td>");
-                                    out.print("<td>" + listGheTrong.get(i).toString() + "</td>");
-                                    out.print("<td>" + listCar.get(i).getPriceTicket() + "</td>");
-                                    out.print("<td><a href=\"/WebApplication.teamfive/schedule/orderTicketDetail.htm?scheduleId="+listCar.get(i).getSchedule().getScheduleId()+"&carId="+listCar.get(i).getCarId()+"\">Đặt vé</a></td>");
-                                    out.print("</tr>");
-                                }
-                            %>
-                        </tbody>
-                    </table>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <s:form action="handleSearchScheduleClient.htm" method="GET" commandName="schedule" role="form">
+                            <legend>Lich trình: ${sessionScope.diemdau} - ${sessionScope.diemcuoi}</legend>
+                            <div class="row">
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <label for="">Tỉnh Đi</label>
+                                        <s:input path="placeStart" type="text" class="form-control" id="" placeholder="Điền vào tỉnh đi" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <label for="">Tỉnh Đến</label>
+                                        <s:input path="placeCome" type="text" class="form-control" id="" placeholder="Điền vào tỉnh đến" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <label for="">Ngày Đi</label>
+                                        <s:input path="dateStart" type="date" class="form-control" id="" placeholder="Nhập ngày đi" required="required"/>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary text-center " style="margin-top: 25px">Tìm xe</button>
+                            </div>
+                        </s:form>
+                        <table class="table table-hover">
+                            <thead style="background-color: #cfc">
+                                <tr class="info">
+                                    <th>Hãng xe</th>
+                                    <th>Giờ đi</th>
+                                    <th>Giờ đến</th>
+                                    <th>Loại xe</th>
+                                    <th>Số chỗ trống</th>
+                                    <th>Giá vé</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%
+                                    ArrayList<String> listGheTrong = (ArrayList<String>) request.getAttribute("listChotrong");
+                                    ArrayList<Car> listCar = (ArrayList<Car>) request.getAttribute("listCar");
+                                    for (int i = 0; i < listCar.size(); i++) {
+                                        out.print("<tr class=\"scheduleInfo jumbotron\">");
+                                        out.print("<td>" + listCar.get(i).getCom().getName() + "</td>");
+                                        out.print("<td>" + listCar.get(i).getTimeStart() + "</td>");
+                                        out.print("<td>" + listCar.get(i).getTimeCome() + "</td>");
+                                        out.print("<td>" + listCar.get(i).getCarType() + " " + listCar.get(i).getNumberOfseat() + " " + "chỗ" + "</td>");
+                                        out.print("<td>" + listGheTrong.get(i).toString() + "</td>");
+                                        out.print("<td>" + listCar.get(i).getPriceTicket() + "</td>");
+                                        out.print("<td><a class=\"btn btn-primary text-center\" href=\"/WebApplication.teamfive/schedule/orderTicketDetail.htm?scheduleId=" + listCar.get(i).getSchedule().getScheduleId() + "&carId=" + listCar.get(i).getCarId() + "\">Đặt vé</a></td>");
+                                        out.print("</tr>");
+                                    }
+                                %>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
+
     </body>
 </html>

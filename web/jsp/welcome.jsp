@@ -15,7 +15,7 @@
     </head>
     <body style="background: lavender">
         <div class="welcome">
-            <h1>Chào mừng bạn đến với hệ thống quản lí đặt vé xe khách đường dài</h1>
+            <h1>QUẢN LÍ ĐẶT VÉ XE KHÁCH ĐƯỜNG DÀI</h1>
         </div>
     </body>
 </html>

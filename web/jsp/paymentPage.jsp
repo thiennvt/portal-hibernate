@@ -40,6 +40,7 @@
 
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav navbar-right">
+                        <li><a href="<c:url value="/ticket/showSearchTicket.htm"/>">Kiển tra vé</a></li>
                         <li><a href="<c:url value="/company/loginPageCompany.htm"/>">Đăng nhập</a></li>
                         <li><a href="<c:url value="/company/initInsertCompany.htm"/>">Đăng kí</a></li>
                     </ul>
@@ -60,7 +61,7 @@
             <s:form action="handleOrderTicket.htm" commandName="ticket" method="GET">
                 <div class="row">
                     <div style="margin-top: 80px;" class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-md-push-2 col-lg-push-2">
-                        <table class="table text-center">
+                        <table style="border:none">
                             <tbody>
                                 <tr>
                                     <td colspan="2" style="font-weight: bold;color: red;">THÔNG TIN VÉ ĐẶT</td>
@@ -68,14 +69,20 @@
                                 <tr>
                                     <td class="format_td">Họ tên</td>
                                     <td><s:input path="customerName" readonly="true" class="format_input"/></td>
+                                    <td class="format_td">Điểm xuất phát </td>
+                                    <td><s:input path="car.schedule.placeStart" readonly="true" class="format_input"/> : <s:input path="car.timeStart" readonly="true" class="format_input"/></td>
                                 </tr>
                                 <tr>
                                     <td class="format_td">Ngày đi</td>
                                     <td><s:input path="dateStart" readonly="true" class="format_input"/></td>
+                                    <td class="format_td">Điểm đến</td>
+                                    <td><s:input path="car.schedule.placeCome" readonly="true" class="format_input"/> : <s:input path="car.timeCome" readonly="true" class="format_input"/></td>
                                 </tr>
                                 <tr>
-                                    <td class="format_td">Số lượng vé</td>
+                                    <td class="format_td">Số lượng vé: </td>
                                     <td><s:input path="quanTicket" readonly="true" class="format_input"/></td>
+                                    <td class="format_td">Hãng xe: </td>
+                                    <td><s:input path="company.name" readonly="true" class="format_input"/></td>
                                 </tr>
                                 <tr>
                                     <td class="format_td">Tổng tiền</td>

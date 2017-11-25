@@ -19,7 +19,7 @@
     <body>
         <div class="center">
             <div>
-                <%--<button class="button_left"><a href="<c:url value="initInsertUserStaff.htm"/>" target="display">Insert</a></button>--%>
+                <button class="button_left"><a href="<c:url value="/company/ThongKeNhaXe.htm"/>" target="display">Xem thống kê</a></button>
                 <p style="text-align: center;color: red;font-size: 20px;"><b>Quản lí nhà xe</b></p>
                 <div class="search_right">
                     <s:form action="handleSearchCompany.htm" commandName="company" method="GET">

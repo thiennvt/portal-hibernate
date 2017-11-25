@@ -42,45 +42,37 @@
                     <section class="content">
                         <div class="table-responsive text-center">
                         <s:form action="handleUpdateSchedule.htm" commandName="schedule" method="GET">
-                            <table class="table text-center"b style="background: skyblue;">
+                            <table class="table no-border"style="background: wheat;border:none">
                                 <tr style="background: #0091d9">
-                                    <td colspan="2" class="thongtin">CẬP NHẬT THÔNG TIN LỊCH TRÌNH</td>
+                                    <td colspan="4" class="thongtin">CẬP NHẬT THÔNG TIN LỊCH TRÌNH</td>
                                 </tr>
                                 <tr>
-                                    <th>ID</th>
-                                    <td><s:input path="scheduleId" readonly="true" class="form-control text-center"/></td>
+                                    <th style="text-align: right">ID</th>
+                                    <td><s:input path="scheduleId" readonly="true"/></td>
+                                    <th style="text-align: right">Place Come</th>
+                                    <td><s:input path="placeCome"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Route</th>
-                                    <td><s:input path="route" class="form-control text-center"/></td>
+                                    <th style="text-align: right">Route</th>
+                                    <td><s:input path="route"/></td>
+                                    <th style="text-align: right">Status</th>
+                                    <td><s:input path="status"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Kilometer</th>
-                                    <td><s:input path="kilometer" class="form-control text-center"/></td>
+                                    <th style="text-align: right">Kilometer</th>
+                                    <td><s:input path="kilometer"/></td>
+                                    <th style="text-align: right">Date Create</th>
+                                    <td><s:input path="dateCreate"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Place start</th>
-                                    <td><s:input path="placeStart" class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Place Come</th>
-                                    <td><s:input path="placeCome" class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Status</th>
-                                    <td><s:input path="status" class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Date Create</th>
-                                    <td><s:input path="dateCreate" class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Note</th>
-                                    <td><s:textarea path="note" class="form-control text-center"/></td>
+                                    <th style="text-align: right">Place start</th>
+                                    <td><s:input path="placeStart"/></td>
+                                    <th style="text-align: right">Note</th>
+                                    <td><s:textarea path="note"/></td>
                                 </tr>
 
                                 <tr>
-                                    <td colspan="2"><input class="btn btnUpdate btn-primary" type="submit" name="submit" value="Submit"></td>
+                                    <td colspan="4"><input class="btn btnUpdate btn-primary" type="submit" name="submit" value="Submit"></td>
                                 </tr>
                             </table>
                         </s:form>

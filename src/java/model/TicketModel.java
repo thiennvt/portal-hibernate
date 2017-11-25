@@ -31,7 +31,7 @@ public class TicketModel extends BaseModel<Ticket> {
         session = sf.openSession();
         ArrayList<Ticket> listTiket;
         try {
-            String hql = "from Ticket t where t.flag = 1";
+            String hql = "from Ticket t where t.flag = 1 order by t.ticketId desc";
             tran = session.beginTransaction();
             listTiket = (ArrayList<Ticket>) session.createQuery(hql).list();
             tran.commit();
@@ -229,13 +229,15 @@ public class TicketModel extends BaseModel<Ticket> {
             Date date = cal.getTime();
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             String dateCreate = sdf.format(date);
-            tic.setAddress(instence.getAddress());
+//            tic.setAddress(instence.getAddress());
+            tic.setAddress(" ");
             tic.setCar(instence.getCar());
             tic.setCompany(instence.getCompany());
             tic.setCustomerName(instence.getCustomerName());
             tic.setDateLast(" ");
             tic.setDateOrder(dateCreate);
             tic.setDateStart(instence.getDateStart());
+//            tic.setDateStart(instence.getCar().get);
             tic.setEmail(instence.getEmail());
             tic.setFlag(true);
             tic.setNote(instence.getNote());

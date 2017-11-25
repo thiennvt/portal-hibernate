@@ -43,45 +43,37 @@
                     <section class="content">
                         <div class="table-responsive text-center">
                         <s:form action="" commandName="schedule" method="GET">
-                            <table class="table text-center"b style="background: skyblue;">
-                                <tr style="background: #0091d9">
-                                    <td colspan="2" class="thongtin">THÔNG TIN CHI TIẾT LỊCH TRÌNH</td>
+                            <table class="table no-border"style="background: wheat;border:none">
+                                <tr>
+                                    <td colspan="4" class="thongtin">THÔNG TIN CHI TIẾT LỊCH TRÌNH</td>
                                 </tr>
                                 <tr>
-                                    <th>ID</th>
-                                    <td><s:input path="scheduleId" readonly="true" class="form-control text-center"/></td>
+                                    <th style="text-align: right">ID</th>
+                                    <td><s:input path="scheduleId" readonly="true"style="border:none;background: wheat"/></td>
+                                    <th style="text-align: right">Place Come</th>
+                                    <td><s:input path="placeCome" readonly="true"style="background: wheat;border:none"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Route</th>
-                                    <td><s:input path="route" readonly="true" class="form-control text-center"/></td>
+                                    <th style="text-align: right">Route</th>
+                                    <td><s:input path="route" readonly="true"style="background: wheat;border:none"/></td>
+                                    <th style="text-align: right">Status</th>
+                                    <td><s:input path="status" readonly="true"style="background: wheat;border:none"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Kilometer</th>
-                                    <td><s:input path="kilometer" readonly="true" class="form-control text-center"/></td>
+                                    <th style="text-align: right">Kilometer</th>
+                                    <td><s:input path="kilometer" readonly="true"style="background: wheat;border:none"/></td>
+                                    <th style="text-align: right">Date Create</th>
+                                    <td><s:input path="dateCreate" readonly="true"style="background: wheat;border:none"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Place start</th>
-                                    <td><s:input path="placeStart" readonly="true" class="form-control text-center"/></td>
+                                    <th style="text-align: right">Place start</th>
+                                    <td><s:input path="placeStart" readonly="true"style="background: wheat;border:none"/></td>
+                                    <th style="text-align: right">Date Last</th>
+                                    <td><s:input path="dateCreateLast" readonly="true" style="background: wheat;border:none"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Place Come</th>
-                                    <td><s:input path="placeCome" readonly="true" class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Status</th>
-                                    <td><s:input path="status" readonly="true" class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Date Create</th>
-                                    <td><s:input path="dateCreate" readonly="true" class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Date Last</th>
-                                    <td><s:input path="dateCreateLast" readonly="true" class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Note</th>
-                                    <td><s:input path="note" readonly="true" class="form-control text-center"/></td>
+                                    <th style="text-align: right">Note</th>
+                                    <td><s:input path="note" readonly="true"style="background: wheat;border:none"/></td>
                                 </tr>
                             </table>
                         </s:form>

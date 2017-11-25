@@ -29,12 +29,12 @@
                     <!-- Content Header (Page header) -->
                     <section class="content-header">
                         <h1>
-                            Lịch trình
-                            <small>thêm lịch trình</small>
+                            Đặt vé
+                            <small>Cập nhật vé</small>
                         </h1>
                         <ol class="breadcrumb">
                             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                            <li class="active">Quản lí lịch trình</li>
+                            <li class="active">Quản lí đặt vé</li>
                         </ol>
                     </section>
                     <section class="content-header">
@@ -43,64 +43,52 @@
                     <section class="content">
                         <div class="table-responsive text-center">
                         <s:form action="handleUpdateTicketOrder.htm" commandName="updateTicket" method="GET">
-                            <table class="table text-center"b style="background: skyblue;">
+                            <table class="table no-border"style="background: wheat;border:none">
                                 <tr style="background: #0091d9">
-                                    <td colspan="2" class="thongtin">NHẬP THÔNG TIN LỊCH TRÌNH MỚI</td>
+                                    <td colspan="4" class="thongtin">CẬP NHẬP THÔNG TIN VÉ</td>
                                 </tr>
                                 <tr>
-                                    <th>ID</th>
-                                    <td><s:input path="ticketId" readonly="true" class="form-control text-center"/></td>
+                                    <th style="text-align: right">ID</th>
+                                    <td><s:input path="ticketId" readonly="true"/></td>
+                                    <th style="text-align: right">Quantity Ticket</th>
+                                    <td><s:input path="quanTicket"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Ticket Type</th>
-                                    <td><s:input path="ticketType" class="form-control text-center"/></td>
+                                    <th style="text-align: right">Ticket Type</th>
+                                    <td><s:input path="ticketType"/></td>
+                                    <th style="text-align: right">Number Seat</th>
+                                    <td><s:input path="numberOfSeat"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Customer Name</th>
-                                    <td><s:input path="customerName" class="form-control text-center"/></td>
+                                    <th style="text-align: right">Customer Name</th>
+                                    <td><s:input path="customerName"/></td>
+                                    <th style="text-align: right">Date Start</th>
+                                    <td><s:input path="dateStart"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Address</th>
-                                    <td><s:input path="address" class="form-control text-center"/></td>
+                                    <th style="text-align: right">Address</th>
+                                    <td><s:input path="address"/></td>
+                                    <th style="text-align: right">Price</th>
+                                    <td><s:input path="price"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Email</th>
-                                    <td><s:input path="email" class="form-control text-center"/></td>
+                                    <th style="text-align: right">Email</th>
+                                    <td><s:input path="email"/></td>
+                                    <th style="text-align: right">Date Order</th>
+                                    <td><s:input path="dateOrder"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Phone</th>
-                                    <td><s:input path="phone" class="form-control text-center"/></td>
+                                    <th style="text-align: right">Phone</th>
+                                    <td><s:input path="phone"/></td>
+                                    <th style="text-align: right">Note</th>
+                                    <td><s:input path="note"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Quantity Ticket</th>
-                                    <td><s:input path="quanTicket" class="form-control text-center"/></td>
+                                    <th style="text-align: right">Status</th>
+                                    <td><s:input path="status"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Number Seat</th>
-                                    <td><s:input path="numberOfSeat" class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Date Start</th>
-                                    <td><s:input path="dateStart" class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Price</th>
-                                    <td><s:input path="price" class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Date Order</th>
-                                    <td><s:input path="dateOrder" class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Note</th>
-                                    <td><s:input path="note" class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Status</th>
-                                    <td><s:input path="status" class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2"><input class="btn btnUpdate btn-primary" type="submit" name="submit" value="Submit"></td>
+                                    <td colspan="4"><input class="btn btnUpdate btn-primary" type="submit" name="submit" value="Submit"></td>
                                 </tr>
                             </table>
                         </s:form>

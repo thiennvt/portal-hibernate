@@ -43,52 +43,42 @@
                     <section class="content">
                         <div class="table-responsive text-center">
                         <s:form action="handleUpdateCompanyDetialClient.htm" commandName="updateCompany" method="GET">
-                            <table class="table text-center"b style="background: skyblue;">
+                            <table class="table no-border"style="background: wheat;border:none">
                                 <tr style="background: #0091d9">
-                                    <td colspan="2" class="thongtin"><h4><b>CẬP NHẬT THÔNG TIN HÃNH XE</b></h4></td>
+                                    <td colspan="4" class="thongtin"><h4><b>CẬP NHẬT THÔNG TIN HÃNH XE</b></h4></td>
                                 </tr>
                                 <tr>
-                                    <th>ID</th>
-                                    <td><s:input path="companyId" readonly="true" class="form-control text-center"/></td>
+                                    <th style="text-align: right">ID</th>
+                                    <td><s:input path="companyId" readonly="true"/></td>
+                                    <th style="text-align: right">Email</th>
+                                    <td><s:input path="email"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Company Name</th>
-                                    <td><s:input path="name" class="form-control text-center"/></td>
+                                    <th style="text-align: right">Company Name</th>
+                                    <td><s:input path="name"/></td>
+                                    <th style="text-align: right">Phone</th>
+                                    <td><s:input path="phone"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Account</th>
-                                    <td><s:input path="accountName" class="form-control text-center"/></td>
+                                    <th style="text-align: right">Account</th>
+                                    <td><s:input path="accountName"/></td>
+                                    <th style="text-align: right">Hotline</th>
+                                    <td><s:input path="hotline"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Password</th>
-                                    <td><s:input path="password" class="form-control text-center"/></td>
+                                    <th style="text-align: right">Password</th>
+                                    <td><s:input path="password"/></td>
+                                    <th style="text-align: right">Date Create</th>
+                                    <td><s:input path="dateCreate"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Address</th>
-                                    <td><s:input path="address" class="form-control text-center"/></td>
+                                    <th style="text-align: right">Address</th>
+                                    <td><s:input path="address"/></td>
+                                    <th style="text-align: right">Note</th>
+                                    <td><s:textarea rows="3" path="note"/></td>
                                 </tr>
                                 <tr>
-                                    <th>Email</th>
-                                    <td><s:input path="email" class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Phone</th>
-                                    <td><s:input path="phone" class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Hotline</th>
-                                    <td><s:input path="hotline" class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Date Create</th>
-                                    <td><s:input path="dateCreate" class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
-                                    <th>Note</th>
-                                    <td><s:textarea rows="3" path="note" class="form-control text-center"/></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2"><input class="btn btnUpdate btn-primary" type="submit" name="submit" value="Submit"></td>
+                                    <td colspan="4"><input class="btn btnUpdate btn-primary" type="submit" name="submit" value="Submit"></td>
                                 </tr>
                             </table>
 

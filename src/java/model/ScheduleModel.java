@@ -219,8 +219,8 @@ public class ScheduleModel extends BaseModel<Schedule> {
             String hql = "from Schedule s where s.placeStart like :key1 and s.placeCome like :key2  and s.flag = 1";
             tran = session.beginTransaction();
             Query query = session.createQuery(hql)
-                    .setParameter("key1", "%" + sche.getPlaceStart() + "%")
-                    .setParameter("key2", "%" + sche.getPlaceCome() + "%");
+                    .setParameter("key1", "%" + sche.getPlaceStart().trim() + "%")
+                    .setParameter("key2", "%" + sche.getPlaceCome().trim() + "%");
             listSchedule = (ArrayList<Schedule>) query.list();
             tran.commit();
             return listSchedule;

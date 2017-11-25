@@ -190,7 +190,8 @@ public class ScheduleController {
     public ModelAndView handleSearchScheduleClient(@ModelAttribute("schedule") Schedule sche, HttpSession session) {
         try {
             ModelAndView model = new ModelAndView("/showScheduleOrder");
-//            ArrayList<Car> listCar = scheMdel.getAllCarBySchedule(sche);
+            Schedule schedule = new Schedule();
+            model.getModelMap().put("schedule", schedule);
             //lấy ra danh sách xe
             ArrayList<Car> listCar = scheMdel.getAllCarBySchedule(sche);
             model.addObject("listCar", listCar);
@@ -333,9 +334,9 @@ public class ScheduleController {
             String timeStart = ticket.getCar().getTimeStart();
             String placeStart = ticket.getCar().getSchedule().getPlaceStart();
             String ngaydi = ticket.getDateStart();
-            String message = "Dat ve thanh cong lich trinh:  " + schedule + ". " + company + ". " + "Bien so xe: " + car + ". Ngay khoi hanh: "+ngaydi+ ".  Noi khoi hanh: "+placeStart +   ". Thoi gian khoi hanh: " + timeStart;
+            String message = "Dat ve thanh cong lich trinh:  " + schedule + ". " + company + ". " + "Bien so xe: " + car + ". Ngay khoi hanh: " + ngaydi + ".  Noi khoi hanh: " + placeStart + ". Thoi gian khoi hanh: " + timeStart;
             EmailUtil.sendEmal(email, "Thu cam on", message);
-            SMSUtil.sendSMS(phone, message);
+//            SMSUtil.sendSMS(phone, message);
             ticketModel.updateStatus(ticketId);
             return model;
         } catch (Exception e) {

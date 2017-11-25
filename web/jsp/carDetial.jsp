@@ -42,56 +42,46 @@
                         <section class="content">
                             <div class="table-responsive text-center">
                             <s:form action="initCarDetail.htm" commandName="carDetail" method="GET">
-                                <table class="table text-center"b style="background: skyblue;">
+                                <table class="table no-border"style="background: wheat;border:none">
                                     <tr style="background: #0091d9">
-                                        <td colspan="2" class="thongtin"><h4><b>THÔNG TIN CHI TIẾT XE KHÁCH</b></h4></td>
+                                        <td colspan="4" class="thongtin"><h4><b>THÔNG TIN CHI TIẾT XE KHÁCH</b></h4></td>
                                     </tr>
                                     <tr>
-                                        <th>ID</th>
-                                        <td><s:input path="carId" readonly="true" class="form-control text-center"/></td>
+                                        <th style="text-align: right">ID</th>
+                                        <td><s:input path="carId" readonly="true" style="background: wheat;border:none"/></td>
+                                        <th style="text-align: right">Company</th>
+                                        <td><s:input path="company" readonly="true" style="background: wheat;border:none"/></td>
                                     </tr>
                                     <tr>
-                                        <th>Car Type</th>
-                                        <td><s:input path="carType" readonly="true" class="form-control text-center"/></td>
+                                        <th style="text-align: right">Car Type</th>
+                                        <td><s:input path="carType" readonly="true" style="background: wheat;border:none" /></td>
+                                        <th style="text-align: right">Schedule</th>
+                                        <td><s:textarea rows="1" path="schedule.route" readonly="true" style="background: wheat;border:none"/></td>
                                     </tr>
                                     <tr>
-                                        <th>Number Car</th>
-                                        <td><s:input path="numberCar" readonly="true" class="form-control text-center"/></td>
+                                        <th style="text-align: right">Number Car</th>
+                                        <td><s:input path="numberCar" readonly="true" style="background: wheat;border:none"/></td>
+                                        <th style="text-align: right">Date Create</th>
+                                        <td><s:input path="dateCreate" readonly="true" style="background: wheat;border:none"/></td>
                                     </tr>
                                     <tr>
-                                        <th>Color</th>
-                                        <td><s:input path="color" readonly="true" class="form-control text-center"/></td>
+                                        <th style="text-align: right">Color</th>
+                                        <td><s:input path="color" readonly="true" style="background: wheat;border:none"/></td>
+                                        <th style="text-align: right">Date Last</th>
+                                        <td><s:input path="dateCreateLast" readonly="true" style="background: wheat;border:none"/></td>
                                     </tr>
                                     <tr>
-                                        <th>Number of Seat</th>
-                                        <td><s:input path="numberOfseat" readonly="true" class="form-control text-center"/></td>
+                                        <th style="text-align: right">Number of Seat</th>
+                                        <td><s:input path="numberOfseat" readonly="true" style="background: wheat;border:none"/></td>
+                                        <th style="text-align: right">Status</th>
+                                        <td><s:input path="status" readonly="true"  style="background: wheat;border:none"/></td>
                                     </tr>
                                     <tr>
-                                        <th>Company</th>
-                                        <td><s:input path="company" readonly="true" class="form-control text-center"/></td>
+                                        <th style="text-align: right">Note</th>
+                                        <td><s:textarea rows="3" path="note" readonly="true"style="background: wheat;border:none"/></td>
                                     </tr>
                                     <tr>
-                                        <th>Schedule</th>
-                                        <td><s:textarea rows="3" path="schedule.route" readonly="true" class="form-control text-center"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Date Create</th>
-                                        <td><s:input path="dateCreate" readonly="true" class="form-control text-center"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Date Last</th>
-                                        <td><s:input path="dateCreateLast" readonly="true" class="form-control text-center"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Status</th>
-                                        <td><s:input path="status" readonly="true" class="form-control text-center"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Note</th>
-                                        <td><s:textarea rows="3" path="note" readonly="true" class="form-control text-center"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2"><a class="update" href="<c:url value="initConfirmCompany.htm?companyId=${company.companyId}" />" target="display"><strong>${confirm}</strong></a></td>
+                                        <td colspan="4"><a class="update" href="<c:url value="initConfirmCompany.htm?companyId=${company.companyId}" />" target="display"><strong>${confirm}</strong></a></td>
                                     </tr>
                                 </table>
                             </s:form>

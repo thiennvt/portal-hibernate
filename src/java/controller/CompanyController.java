@@ -11,6 +11,7 @@ package controller;
  */
 import entity.Company;
 import entity.Schedule;
+import form.entity.ThongKe;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -260,6 +261,21 @@ public class CompanyController {
         return model;
     }
 
+    //==================================================
+    @RequestMapping(value = "/ThongKeNhaXe")
+    public ModelAndView showThongKe() {
+        ModelAndView model = new ModelAndView("/thongke");
+        ArrayList<ThongKe> list_thongke = comModel.thongKeVeXe();
+        model.addObject("list_thongke", list_thongke);
+        return model;
+    }
     
-
+    //==================================================
+    @RequestMapping(value = "/ThongKeNhaXeClient")
+    public ModelAndView showThongKeByCompany(@RequestParam("companyId") int companyId) {
+        ModelAndView model = new ModelAndView("/thongkeClient");
+        ArrayList<ThongKe> list_thongke = comModel.thongKeVeXe(companyId);
+        model.addObject("list_thongke", list_thongke);
+        return model;
+    }
 }

@@ -37,7 +37,7 @@
                         </ol>
                     </section>
                     <section class="content">
-                        <h1 class="text-center">CHÀO MỪNG BẠN DẾN VỚI TRANG QUẢN TRỊ</h1>
+                        <h1 class="text-center">HỆ THỐNG QUẢN LÍ ĐẠT VÉ XE KHÁCH ĐƯỜNG DÀI</h1>
                         <h3 class="text-center" style="color: red">${report}</h3>
                     <h4 class="text-center" style="color: red"><a href="<c:url value="/company/initUpdateCompamy.htm?companyId=${sessionScope.id}"/>">${link}</a></h4>
                 </section>
