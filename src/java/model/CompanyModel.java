@@ -336,16 +336,14 @@ public class CompanyModel extends BaseModel<Company> {
 //        }
 //        return listID;
 //    }
-
-    
     public ArrayList<ThongKe> thongKeVeXe(int companyId) {
         session = sf.openSession();
         ArrayList<Object[]> listCom = null;
         ArrayList<ThongKe> listThongKe = new ArrayList<>();
 
         try {
-            String hql = "select c.carId,c.numberCar,count(t.car.carId) as slve from Car c left join c.tickets t where c.com.companyId = '"+ companyId
-                    +"' and c.flag = '1' group by c.carId order by slve desc ";
+            String hql = "select c.carId,c.numberCar,count(t.car.carId) as slve,c.priceTicket from Car c left join c.tickets t where c.com.companyId = '" + companyId
+                    + "' and c.flag = '1' group by c.carId order by slve desc ";
             tran = session.beginTransaction();
             Query query = session.createQuery(hql);
             listCom = (ArrayList<Object[]>) query.list();
@@ -363,6 +361,43 @@ public class CompanyModel extends BaseModel<Company> {
                 tk.setId((Integer) object[0]);
                 tk.setName((String) object[1]);
                 tk.setCount((Long) object[2]);
+                if ((Long) object[2] > 0) {
+                    tk.setTotalPrice(Double.parseDouble((String) object[3]) * (Long) object[2]);
+                }
+                listThongKe.add(tk);
+            }
+        }
+        return listThongKe;
+    }
+
+    public ArrayList<ThongKe> thongKeVeXe(int companyId, String date) {
+        session = sf.openSession();
+        ArrayList<Object[]> listCom = null;
+        ArrayList<ThongKe> listThongKe = new ArrayList<>();
+
+        try {
+            String hql = "select c.carId,c.numberCar,count(t.car.carId) as slve,c.priceTicket from Car c join c.ngaydi n left join c.tickets t where c.com.companyId = '" + companyId
+                    + "' and c.flag = '1' and t.flag = '1' and n.ngayDi = '"+ date +"' group by c.carId order by slve desc ";
+            tran = session.beginTransaction();
+            Query query = session.createQuery(hql);
+            listCom = (ArrayList<Object[]>) query.list();
+            tran.commit();
+        } catch (Exception e) {
+            tran.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        if (listCom != null) {
+            for (Object[] object : listCom) {
+                ThongKe tk = new ThongKe();
+                tk.setId((Integer) object[0]);
+                tk.setName((String) object[1]);
+                tk.setCount((Long) object[2]);
+                if ((Long) object[2] > 0) {
+                    tk.setTotalPrice(Double.parseDouble((String) object[3]) * (Long) object[2]);
+                }
                 listThongKe.add(tk);
             }
         }
@@ -380,7 +415,7 @@ public class CompanyModel extends BaseModel<Company> {
 //        }
 
 //        ArrayList<Object> listUser = (ArrayList<Object>) model.getListCarByCompany(2);
-        ArrayList<ThongKe> listUser = model.thongKeVeXe(7);
+        ArrayList<ThongKe> listUser = model.thongKeVeXe(2);
         for (ThongKe u : listUser) {
             System.out.println(u.toString());
         }

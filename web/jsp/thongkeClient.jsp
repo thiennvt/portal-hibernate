@@ -22,38 +22,36 @@
         <link href="<c:url value="/resources/css/jquery.dataTables.min.css"/>" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="<c:url value='/resources/jQuery/google-chart.js' />"></script>
         <script type="text/javascript">
-            google.charts.load('current', {'packages': ['bar']});
-            google.charts.setOnLoadCallback(drawStuff);
-
-            function drawStuff() {
-                var data = new google.visualization.arrayToDataTable([
-                ['Tên hãng xe', 'Số lượng vé'],
-            <c:if test="${not empty list_thongke}">
-                <c:forEach var="thongke" items="${list_thongke}">
-                ["${thongke.name}", ${thongke.count}],
-                </c:forEach>
-            </c:if>
-
+            google.charts.load("current", {packages: ["corechart"]});
+            google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ["Element", "Tổng tiền", {role: "style"}],
+                    <c:if test="${not empty list_thongke}">
+                        <c:forEach var="thongke" items="${list_thongke}">
+                            ["${thongke.name}", ${thongke.totalPrice}, "color: blue"],
+                        </c:forEach>
+                    </c:if>
                 ]);
 
+                var view = new google.visualization.DataView(data);
+                view.setColumns([0, 1,
+                    {calc: "stringify",
+                        sourceColumn: 1,
+                        type: "string",
+                        role: "annotation"},
+                    2]);
+
                 var options = {
-                    title: 'Biểu đồ thống kê lượng khách của nhà xe',
-                    width: 700,
-                    legend: {position: 'none'},
-                    chart: {title: 'Biểu đồ thống kê lượng khách của nhà xe',
-                        subtitle: 'Số lượng vé của từng hãng xe'},
-                    bars: 'horizontal', // Required for Material Bar Charts.
-                    axes: {
-                        x: {
-                            0: {side: 'top', label: 'Số lượng vé'} // Top x-axis.
-                        }
-                    },
-                    bar: {groupWidth: "90%"}
+                    title: "Biểu đồ thống kê thu nhập của từng xe",
+                    width: 600,
+                    height: 400,
+                    bar: {groupWidth: "95%"},
+                    legend: {position: "none"},
                 };
-                var chart = new google.charts.Bar(document.getElementById('top_x_div'));
-                chart.draw(data, options);
+                var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+                chart.draw(view, options);
             }
-            ;
         </script>
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
@@ -80,6 +78,7 @@
                             <tr class="infor">
                                 <th>Tên xe</th>
                                 <th>Tổng số lượng vé</th>
+                                <th>Tổng tiền</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -87,11 +86,12 @@
                                 <tr>
                                     <td>${thongke.name}</td>
                                     <td>${thongke.count}</td>
-                                </tr> 
+                                    <td>${thongke.totalPrice} 00</td>
+                                </tr>
                             </c:forEach>
                         </tbody>
                     </table>
-                    <div id="top_x_div" style="width: 300px; height: 300px;float: left;padding-left: 30px;"></div>
+                    <div id="barchart_values" style="width: 600px; height: 300px;float: left;padding-left: 30px;"></div>
                 </section>
                 <!-- /.content -->
             </div>

@@ -22,10 +22,9 @@
                 ["Element", "Density", {role: "style"}],
                 <c:if test="${not empty list_thongke}">
                     <c:forEach var="thongke" items="${list_thongke}">
-                        ["${thongke.name}", ${thongke.totalPrice}, "color: #b87333"]
+                        ["${thongke.name}", ${thongke.totalPrice}, "color: blue"],
                     </c:forEach>
                 </c:if>
-                ["Platinum", 21.45, "color: #e5e4e2"]
                 ]);
 
                 var view = new google.visualization.DataView(data);
@@ -55,11 +54,12 @@
             <p style="text-align: center;color: red;font-size: 20px;"><b>Biểu đồ thống kê</b></p>
         </div>
         <section style="float: left;padding-left: 50px;padding-right: 30px;padding-top: 30px;">
-            <table border="1">
+            <table style="float: left;padding-right: 30px;" border="1">
                 <thead>
                     <tr class="infor">
                         <th>Tên nhà xe</th>
                         <th>Tổng số lượng vé</th>
+                        <th>Tổng tiền vé</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,6 +67,7 @@
                         <tr>
                             <td>${thongke.name}</td>
                             <td>${thongke.count}</td>
+                            <td>${thongke.totalPrice} 00</td>
                         </tr> 
                     </c:forEach>
                 </tbody>

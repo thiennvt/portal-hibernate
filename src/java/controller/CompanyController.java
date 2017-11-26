@@ -274,6 +274,7 @@ public class CompanyController {
     @RequestMapping(value = "/ThongKeNhaXeClient")
     public ModelAndView showThongKeByCompany(@RequestParam("companyId") int companyId) {
         ModelAndView model = new ModelAndView("/thongkeClient");
+//        ModelAndView model = new ModelAndView("/thongke1");
         ArrayList<ThongKe> list_thongke = comModel.thongKeVeXe(companyId);
         model.addObject("list_thongke", list_thongke);
         return model;
