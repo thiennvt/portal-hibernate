@@ -22,5 +22,17 @@
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/jsp/"
           p:suffix=".jsp" />
+    
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="index.htm">indexController</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean name="indexController"
+          class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+          p:viewName="index" />
 
 </beans>

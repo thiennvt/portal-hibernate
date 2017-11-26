@@ -73,73 +73,69 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <s:form action="handleSearchTicketClient.htm" commandName="ticketSearch" method="GET">
-                            <div class="col-xs-3 col-sm-3">
-                                <s:input path="ticketId" class="form-control" type="text"  placeholder="Nhập mã vé"/>
-                                <input class="btn btn-primary" style="margin-top: 10px;" value="Kiểm tra vé" type="Submit" width="30px">
+                        <s:form action="handleSearchTicketClient.htm" commandName="ticket" method="GET">
+                            <div>
+                                <table class="table text-center">
+                                    <tr style="background: #0091d9">
+                                        <td colspan="4" class="thongtin">THÔNG TIN VÉ</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Mã vé</th>
+                                        <td><s:input path="ticketId" readonly="true" class="form-control text-center"/></td>
+                                        <th>Số điện thoại</th>
+                                        <td><s:input path="phone" class="form-control text-center"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Họ tên</th>
+                                        <td><s:input path="customerName" class="form-control text-center"/></td>
+                                        <th>Hãng xe</th>
+                                        <td><s:input path="company.name" class="form-control text-center"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Địa chỉ</th>
+                                        <td><s:input path="address" class="form-control text-center"/></td>
+                                        <th>Số xe</th>
+                                        <td><s:input path="car.numberCar" class="form-control text-center"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Ngày đặt</th>
+                                        <td><s:input path="dateOrder" class="form-control text-center"/></td>
+                                        <th>Ngày đi</th>
+                                        <td><s:input path="dateStart" class="form-control text-center"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Số lượng vé</th>
+                                        <td><s:input path="quanTicket" class="form-control text-center"/></td>
+                                        <th>Điểm xuất phát</th>
+                                        <td><s:input path="car.schedule.placeStart" class="form-control text-center"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tổng tiền</th>
+                                        <td><s:input path="price" class="form-control text-center"/></td>
+                                        <th>Điểm đến</th>
+                                        <td><s:input path="car.schedule.placeCome" class="form-control text-center"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email</th>
+                                        <td><s:input path="email" class="form-control text-center"/></td>
+                                        <th>Giờ đi</th>
+                                        <td><s:input path="car.timeStart" class="form-control text-center"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Trạng thái</th>
+                                        <td><s:input path="status" class="form-control text-center"/></td>
+                                        <th>Giờ đến</th>
+                                        <td><s:input path="car.timeCome" class="form-control text-center"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            <input class="btn btnUpdate btn-info" type="submit" name="submit" value="Cập nhật vé">
+                                            <input class="btn btnUpdate btn-danger" type="submit" name="submit" value="Trờ lại" onclick="history.go(-1)">   
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                         </s:form>
-                        <div class="col-xs-8 col-sm-8">
-                            <table class="table text-center">
-                                <tr style="background: #0091d9">
-                                    <td colspan="4" class="thongtin">THÔNG TIN VÉ</td>
-                                </tr>
-                                <tr>
-                                    <th>Mã vé</th>
-                                    <td><input readonly="true" class="form-control text-center"></td>
-                                    <th>Số điện thoại</th>
-                                    <td><input class="form-control text-center"></td>
-                                </tr>
-                                <tr>
-                                    <th>Họ tên</th>
-                                    <td><input class="form-control text-center"/></td>
-                                    <th>Hãng xe</th>
-                                    <td><input class="form-control text-center"></td>
-                                </tr>
-                                <tr>
-                                    <th>Địa chỉ</th>
-                                    <td><input class="form-control text-center"></td>
-                                    <th>Số xe</th>
-                                    <td><input class="form-control text-center"></td>
-                                </tr>
-                                <tr>
-                                    <th>Ngày đặt</th>
-                                    <td><input class="form-control text-center"></td>
-                                    <th>Ngày đi</th>
-                                    <td><input class="form-control text-center"></td>
-                                </tr>
-                                <tr>
-                                    <th>Số lượng vé</th>
-                                    <td><input class="form-control text-center"></td>
-                                    <th>Điểm xuất phát</th>
-                                    <td><input class="form-control text-center"></td>
-                                </tr>
-                                <tr>
-                                    <th>Tổng tiền</th>
-                                    <td><input class="form-control text-center"></td>
-                                    <th>Điểm đến</th>
-                                    <td><input class="form-control text-center"></td>
-                                </tr>
-                                <tr>
-                                    <th>Email</th>
-                                    <td><input class="form-control text-center"></td>
-                                    <th>Giờ đi</th>
-                                    <td><input class="form-control text-center"></td>
-                                </tr>
-                                <tr>
-                                    <th>Trạng thái</th>
-                                    <td><input class="form-control text-center"></td>
-                                    <th>Giờ đến</th>
-                                    <td><input class="form-control text-center"></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4">
-                                        <input class="btn btnUpdate btn-info" type="submit" name="submit" value="Cập nhật vé">
-                                        <input class="btn btnUpdate btn-danger" type="submit" name="submit" value="Trờ lại" onclick="history.go(-1)">   
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
                     </div>
                 </div>
             </div>

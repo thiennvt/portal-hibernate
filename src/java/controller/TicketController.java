@@ -9,10 +9,12 @@ import entity.Car;
 import entity.NgayDi;
 import entity.Ticket;
 import java.util.ArrayList;
+import javax.servlet.http.HttpSession;
 import model.CarModel;
 import model.ScheduleModel;
 import model.TicketModel;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -136,11 +138,11 @@ public class TicketController {
     }
 
     @RequestMapping(value = "/showSearchTicket")
-    public ModelAndView showSearchTicket(){
+    public ModelAndView showSearchTicket() {
         try {
-            ModelAndView model = new ModelAndView("/ticketSearch");
+            ModelAndView model = new ModelAndView("/searcheTicketClient");
             Ticket tic = new Ticket();
-            model.getModelMap().put("ticketSearch", tic);
+            model.addObject("ticket", tic);
             return model;
         } catch (Exception e) {
             e.printStackTrace();
@@ -148,15 +150,40 @@ public class TicketController {
             return model1;
         }
     }
+
     @RequestMapping(value = "/handleSearchTicketClient")
-    public ModelAndView handlSearchTicketClient(@ModelAttribute("ticketSearch") Ticket ticket){
+    public ModelAndView handlSearchTicketClient(@ModelAttribute("ticket") Ticket ticket, ModelMap mm) {
         Ticket tic = ticModel.getObject(ticket.getTicketId());
         try {
             if (tic != null) {
-                    ModelAndView model = new ModelAndView("/ticketSearch");
-                    model.addObject("ticket", tic);
-                    return model;
+                ModelAndView model = new ModelAndView("/ticketSearch");
+                model.addObject("ticket", tic);
+                return model;
             } else {
+                mm.put("errorSearch", "Mã vé không tồn tại");
+                ModelAndView model = new ModelAndView("/searcheTicketClient");
+                Ticket t = new Ticket();
+                model.addObject("ticket", t);
+                return model;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ModelAndView model1 = new ModelAndView("errorPage");
+            return model1;
+        }
+    }
+
+    @RequestMapping(value = "/showTicketSearchClient")
+    public ModelAndView showTicketSearchClient(HttpSession sesion, ModelMap mm) {
+        String id = sesion.getAttribute("ticketIdSearch").toString();
+        Ticket tic = ticModel.getObject(Integer.parseInt(id));
+        try {
+            if (tic != null) {
+                ModelAndView model = new ModelAndView("/ticketSearch");
+                model.addObject("ticket", tic);
+                return model;
+            } else {
+                mm.put("errorSearch", "Mã vé không tồn tại");
                 ModelAndView model1 = new ModelAndView("errorPage");
                 return model1;
             }
@@ -166,6 +193,7 @@ public class TicketController {
             return model1;
         }
     }
+
     //delete schedule admin
     @RequestMapping(value = "/initDeleteTicket")
     public ModelAndView initAdminDeleteSchedule(@ModelAttribute("schedule") Ticket ticket, @RequestParam("companyId") int companyId) {

@@ -288,6 +288,7 @@ public class TicketModel extends BaseModel<Ticket> {
         }
     }
 
+    
     public static void main(String[] args) {
         TicketModel model = new TicketModel();
 
@@ -295,15 +296,20 @@ public class TicketModel extends BaseModel<Ticket> {
 //        for (Ticket u : listUser) {
 //            System.out.println(u.toString());
 //        }
-        Car car = new Car(1);
-        Company com = new Company(1);
-        //Ticket tic = new Ticket("thuong", "nguyen duong vat", "hai phong", "hoangoc@gmail.com", "phone", 1, "15", "01/02/2017", 100, " ", " ", "xe sang", "da thanh toan", " ", 0, true, 1, 1);
-        Ticket t = new Ticket(3, "2", "Minh móc", "Hai Phong", "123@abc", "123123", "1", "100", "1/1/2017", "100", " ", " ", "Test", "Test", "Test", "0", true, car, com);
-        if (model.addObject(t)) {
-            System.out.println("thanh cong");
-        } else {
-            System.out.println("that bai");
-        }
+//        Car car = new Car(1);
+//        Company com = new Company(1);
+//        //Ticket tic = new Ticket("thuong", "nguyen duong vat", "hai phong", "hoangoc@gmail.com", "phone", 1, "15", "01/02/2017", 100, " ", " ", "xe sang", "da thanh toan", " ", 0, true, 1, 1);
+//        Ticket t = new Ticket(3, "2", "Minh móc", "Hai Phong", "123@abc", "123123", "1", "100", "1/1/2017", "100", " ", " ", "Test", "Test", "Test", "0", true, car, com);
+//        if (model.addObject(t)) {
+//            System.out.println("thanh cong");
+//        } else {
+//            System.out.println("that bai");
+//        }
+        
+        Ticket ticket = model.getObject(91);
+        System.out.println(ticket);
+                
+        
     }
 
 }
